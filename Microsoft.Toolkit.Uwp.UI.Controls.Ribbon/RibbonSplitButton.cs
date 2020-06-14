@@ -3,7 +3,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 {
-    public sealed class RibbonSplitButton : Control
+    public sealed class RibbonSplitButton : Button
     {
         public RibbonSplitButton()
         {

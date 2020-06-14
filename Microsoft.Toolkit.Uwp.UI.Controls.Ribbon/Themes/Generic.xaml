@@ -8,7 +8,7 @@
         <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
         <!-- Other merged dictionaries here -->
     </ResourceDictionary.MergedDictionaries>
-
+    
     <Style TargetType="local:RibbonButton">
         <Setter Property="Background"
                 Value="{ThemeResource AppBarItemBackgroundThemeBrush}" />
@@ -247,7 +247,6 @@
         <Setter Property="Padding"
                 Value="{ThemeResource ButtonPadding}" />
 
-
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RibbonSplitButton">
@@ -315,6 +314,65 @@
                                 </Setter>
                             </Style>
                         </Grid.Resources>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="FirstColumn"
+                                              Width="*"
+                                              MinWidth="{ThemeResource SplitButtonPrimaryButtonSize}" />
+                            <ColumnDefinition x:Name="SecondColumn"
+                                              Width="{ThemeResource SplitButtonSecondaryButtonSize}" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid x:Name="PrimaryBackgroundGrid" />
+
+                        <Grid x:Name="SecondaryBackgroundGrid"
+                              Grid.Column="1" />
+                        
+                        <Grid x:Name="Border"
+                              Grid.ColumnSpan="2"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              CornerRadius="{TemplateBinding CornerRadius}" />
+
+                        <Button x:Name="PrimaryButton"
+                                Grid.Column="0"
+                                Foreground="{TemplateBinding Foreground}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="Transparent"
+                                Content="{TemplateBinding Content}"
+                                ContentTransitions="{TemplateBinding ContentTransitions}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Command="{TemplateBinding Command}"
+                                CommandParameter="{TemplateBinding CommandParameter}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Padding="{TemplateBinding Padding}"
+                                IsTabStop="False"
+                                AutomationProperties.AccessibilityView="Raw" />
+
+                        <Button x:Name="SecondaryButton"
+                                Grid.Column="1"
+                                Foreground="{TemplateBinding Foreground}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="Transparent"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Padding="0,0,8,0"
+                                IsTabStop="False"
+                                AutomationProperties.AccessibilityView="Raw">
+                            <Button.Content>
+                                <TextBlock FontFamily="Segoe MDL2 Assets"
+                                           FontSize="12"
+                                           Text="&#xE70D;"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           AutomationProperties.AccessibilityView="Raw" />
+                            </Button.Content>
+                        </Button>
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -520,7 +578,6 @@
                                                 Value="{ThemeResource SplitButtonForegroundCheckedPressed}" />
                                     </VisualState.Setters>
                                 </VisualState>
-
                             </VisualStateGroup>
 
                             <VisualStateGroup x:Name="SecondaryButtonPlacementStates">
@@ -534,68 +591,8 @@
                                                 Value="2" />
                                     </VisualState.Setters>
                                 </VisualState>
-
                             </VisualStateGroup>
-
                         </VisualStateManager.VisualStateGroups>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="FirstColumn"
-                                              Width="*"
-                                              MinWidth="{ThemeResource SplitButtonPrimaryButtonSize}" />
-                            <ColumnDefinition x:Name="SecondColumn"
-                                              Width="{ThemeResource SplitButtonSecondaryButtonSize}" />
-                        </Grid.ColumnDefinitions>
-                        <Grid x:Name="PrimaryBackgroundGrid" />
-
-                        <Grid x:Name="SecondaryBackgroundGrid"
-                              Grid.Column="1" />
-                        <Grid x:Name="Border"
-                              Grid.ColumnSpan="2"
-                              BorderBrush="{TemplateBinding BorderBrush}"
-                              BorderThickness="{TemplateBinding BorderThickness}"
-                              CornerRadius="{TemplateBinding CornerRadius}" />
-
-                        <Button x:Name="PrimaryButton"
-                                Grid.Column="0"
-                                Foreground="{TemplateBinding Foreground}"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="Transparent"
-                                Content="{TemplateBinding Content}"
-                                ContentTransitions="{TemplateBinding ContentTransitions}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Command="{TemplateBinding Command}"
-                                CommandParameter="{TemplateBinding CommandParameter}"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Padding="{TemplateBinding Padding}"
-                                IsTabStop="False"
-                                AutomationProperties.AccessibilityView="Raw" />
-
-                        <Button x:Name="SecondaryButton"
-                                Grid.Column="1"
-                                Foreground="{TemplateBinding Foreground}"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="Transparent"
-                                HorizontalContentAlignment="Stretch"
-                                VerticalContentAlignment="Stretch"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Padding="0,0,8,0"
-                                IsTabStop="False"
-                                AutomationProperties.AccessibilityView="Raw">
-                            <Button.Content>
-                                <TextBlock FontFamily="Segoe MDL2 Assets"
-                                           FontSize="12"
-                                           Text="&#xE70D;"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Right"
-                                           AutomationProperties.AccessibilityView="Raw" />
-                            </Button.Content>
-                        </Button>
-
                     </Grid>
 
                 </ControlTemplate>
