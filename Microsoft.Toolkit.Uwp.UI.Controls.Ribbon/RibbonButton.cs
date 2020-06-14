@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-
-// The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 {
@@ -21,36 +11,30 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         }
 
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
-            "Icon",
-            typeof(IconElement),
-            typeof(RibbonButton),
-            new PropertyMetadata(new SymbolIcon(Symbol.Add))
-        );
-        public IconElement Icon {
-            get { return (IconElement)GetValue(IconProperty); }
-            set { SetValue(IconProperty, value); }
-        }
+            "Icon", typeof(IconElement), typeof(RibbonButton), new PropertyMetadata(new SymbolIcon(Symbol.Add)));
 
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
-            "Label",
-            typeof(string),
-            typeof(RibbonButton),
-            new PropertyMetadata("")
-        );
-        public string Label {
-            get { return (string)GetValue(LabelProperty); }
-            set { SetValue(LabelProperty, value); }
-        }
+            "Label", typeof(string), typeof(RibbonButton), new PropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty IsCompactProperty = DependencyProperty.Register(
-            "IsCompact",
-            typeof(bool),
-            typeof(RibbonButton),
-            new PropertyMetadata(false)
-        );
-        public bool IsCompact {
-            get { return (bool)GetValue(IsCompactProperty); }
-            set { SetValue(IsCompactProperty, value); }
+            "IsCompact", typeof(bool), typeof(RibbonButton), new PropertyMetadata(default(bool)));
+
+        public IconElement Icon 
+        {
+            get => (IconElement)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
+        }
+
+        public string Label 
+        {
+            get => (string)GetValue(LabelProperty);
+            set => SetValue(LabelProperty, value);
+        }
+
+        public bool IsCompact 
+        {
+            get => (bool)GetValue(IsCompactProperty);
+            set => SetValue(IsCompactProperty, value);
         }
     }
 }
