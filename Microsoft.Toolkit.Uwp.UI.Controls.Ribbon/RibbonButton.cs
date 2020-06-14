@@ -17,10 +17,10 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         {
             base.OnApplyTemplate();
 
-            if (this.GetTemplateChild("PART_ContentPanel") is StackPanel sp)
+            if (this.GetTemplateChild("ContentPanel") is StackPanel sp)
                 this.contentPanel = sp;
 
-            if (this.GetTemplateChild("PART_LabelBlock") is TextBlock tb)
+            if (this.GetTemplateChild("LabelBlock") is TextBlock tb)
                 this.labelTextBlock = tb;
         }
 

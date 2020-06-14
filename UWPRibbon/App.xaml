@@ -9,9 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary Source="Microsoft.Toolkit.Uwp.UI.Controls.Ribbon/Themes/Generic.xaml" />
-                <!--<ResourceDictionary Source="Microsoft.Toolkit.Uwp.UI.Controls.Ribbon/Themes/GenericTest.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
-            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
