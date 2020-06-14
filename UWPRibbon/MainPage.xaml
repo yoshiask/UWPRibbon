@@ -1,0 +1,244 @@
+﻿<Page
+    x:Class="UWPRibbon.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPRibbon"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ribbon="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon"
+    mc:Ignorable="d"
+    RequestedTheme="Light"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32px"/> <!--Title bar-->
+            <!--Ribbon TODO: Change to auto and set height from control-->
+            <RowDefinition Height="140px"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}">
+            <TextBlock Text="UWP Ribbon" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Margin="10,0,0,0" Foreground="{ThemeResource MediaTextThemeBrush}"/>
+        </Grid>
+        
+        <winui:TabView CanDragTabs="False" CanReorderTabs="False" TabWidthMode="SizeToContent"
+                       IsAddTabButtonVisible="False" CloseButtonOverlayMode="OnPointerOver"
+                       Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}"
+                       VerticalAlignment="Stretch" Grid.Row="1">
+
+            <winui:TabView.Resources>
+                <!--<SolidColorBrush x:Key="TabViewItemHeaderBackgroundSelected" Color="{ThemeResource SystemControlBackgroundChromeMediumBrush}" />-->
+                <Style TargetType="winui:TabViewItem">
+                    <Setter Property="Foreground" Value="{ThemeResource MediaTextThemeBrush}"/>
+                </Style>
+                <Style x:Key="RibbonSeparator" TargetType="Border">
+                    <Setter Property="BorderBrush" Value="{ThemeResource AppBarSeparatorForegroundThemeBrush}"/>
+                    <Setter Property="Width" Value="1"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+                <Style x:Key="RibbonGroupHeader" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+                    <Setter Property="toolkit:DockPanel.Dock" Value="Bottom"/>
+                    <Setter Property="Margin" Value="0,0,0,10"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+            </winui:TabView.Resources>
+
+            <!--<winui:TabView.TabStripHeader>
+                <Grid>
+                    <TextBlock Text="LaTeX Notepad" VerticalAlignment="Center" Foreground="White"
+                           HorizontalTextAlignment="Center" HorizontalAlignment="Center"
+                           Margin="5"/>
+
+                    <toolkit:DockPanel Padding="-5" LastChildFill="True">
+                        <toolkit:DockPanel.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
+                                <Setter Property="RequestedTheme" Value="Dark"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+                        </toolkit:DockPanel.Resources>
+
+                        <Button>
+                            <SymbolIcon Symbol="Save"/>
+                        </Button>
+                        <Button>
+                            <SymbolIcon Symbol="Undo"/>
+                        </Button>
+                        <Button>
+                            <SymbolIcon Symbol="Redo"/>
+                        </Button>
+
+                        <Grid x:Name="TitlebarGrid" Background="Transparent"/>
+                    </toolkit:DockPanel>
+                </Grid>
+            </winui:TabView.TabStripHeader>-->
+
+            <winui:TabViewItem Header="Home">
+                <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+                    <toolkit:DockPanel>
+                        <Border Style="{StaticResource RibbonSeparator}" toolkit:DockPanel.Dock="Right"/>
+                        <TextBlock Text="Clipboard" Style="{StaticResource RibbonGroupHeader}"/>
+
+                        <ribbon:RibbonDropDownButton Icon="Paste" Label="Paste" Margin="0,0,2,0">
+                            <ribbon:RibbonDropDownButton.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Icon="Font" Text="Use destination theme"/>
+                                    <MenuFlyoutItem Text="Keep source formatting">
+                                        <MenuFlyoutItem.Icon>
+                                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF714;" />
+                                        </MenuFlyoutItem.Icon>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem Icon="FontColor" Text="Keep text only"/>
+                                    <MenuFlyoutItem Text="Paste special..."/>
+                                </MenuFlyout>
+                            </ribbon:RibbonDropDownButton.Flyout>
+                        </ribbon:RibbonDropDownButton>
+
+                        <!--<toolkit:UniformGrid Columns="1" RowSpacing="1">
+                            <ribbon:RibbonDropDownButton Icon="PreviewLink" IsCompact="True"/>
+                            <ribbon:RibbonButton Icon="ClearSelection" IsCompact="True"/>
+                            <ribbon:RibbonDropDownButton IsCompact="True">
+                                <ribbon:RibbonDropDownButton.Icon>
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEDFB;" />
+                                </ribbon:RibbonDropDownButton.Icon>
+                                <ribbon:RibbonDropDownButton.Flyout>
+                                    <Flyout>
+                                        <ColorSpectrum Width="100" Height="100"/>
+                                    </Flyout>
+                                </ribbon:RibbonDropDownButton.Flyout>
+                            </ribbon:RibbonDropDownButton>
+                        </toolkit:UniformGrid>-->
+                    </toolkit:DockPanel>
+
+
+                    <toolkit:DockPanel>
+                        <Border Style="{StaticResource RibbonSeparator}" toolkit:DockPanel.Dock="Right"/>
+                        <TextBlock Text="Slides" Style="{StaticResource RibbonGroupHeader}"/>
+
+                        <ribbon:RibbonDropDownButton Icon="Add" Label="New Slide" Margin="0,0,2,0">
+                            <ribbon:RibbonDropDownButton.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Send"/>
+                                    <MenuFlyoutItem Text="Reply"/>
+                                    <MenuFlyoutItem Text="Reply All"/>
+                                </MenuFlyout>
+                            </ribbon:RibbonDropDownButton.Flyout>
+                        </ribbon:RibbonDropDownButton>
+                        
+                        <!--<toolkit:UniformGrid Columns="1" RowSpacing="1">
+                            <ribbon:RibbonDropDownButton Icon="PreviewLink" Label="Layout" IsCompact="True"/>
+                            <ribbon:RibbonButton Icon="ClearSelection" Label="Reset" IsCompact="True"/>
+                            <ribbon:RibbonDropDownButton Label="Section" IsCompact="True">
+                                <ribbon:RibbonDropDownButton.Icon>
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE1AC;" />
+                                </ribbon:RibbonDropDownButton.Icon>
+                                <ribbon:RibbonDropDownButton.Flyout>
+                                    <Flyout>
+                                        <ColorSpectrum Width="100" Height="100"/>
+                                    </Flyout>
+                                </ribbon:RibbonDropDownButton.Flyout>
+                            </ribbon:RibbonDropDownButton>
+                        </toolkit:UniformGrid>-->
+                    </toolkit:DockPanel>
+
+                    <!--TODO: Get this to work-->
+                    <!--<ribbon:RibbonGroup Label="Clipboard">
+                        <ribbon:RibbonButton Icon="Paste" Label="Paste"/>
+                        <ribbon:RibbonButton Icon="Cut" Label="Cut"/>
+                        <ribbon:RibbonColumn>
+                            <ribbon:RibbonButton Icon="Paste" Label="Paste"/>
+                        </ribbon:RibbonColumn>
+                    </ribbon:RibbonGroup>-->
+                </StackPanel>
+            </winui:TabViewItem>
+            
+            <winui:TabViewItem Header="HomeAppBar">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+                        <toolkit:DockPanel>
+                            <Border Style="{StaticResource RibbonSeparator}" toolkit:DockPanel.Dock="Right"/>
+                            <TextBlock Text="Clipboard" Style="{StaticResource RibbonGroupHeader}"/>
+
+                            <AppBarButton Icon="Paste" Label="Paste"
+                                  Style="{ThemeResource AppBarButtonRevealStyle}"/>
+                            <StackPanel>
+                                <AppBarButton Icon="Cut" LabelPosition="Collapsed" IsCompact="True"
+                                  Style="{ThemeResource AppBarButtonRevealStyle}"/>
+                                <AppBarButton Icon="Copy" LabelPosition="Collapsed" IsCompact="True"
+                                  Style="{ThemeResource AppBarButtonRevealStyle}"/>
+                                <AppBarButton LabelPosition="Collapsed" IsCompact="True"
+                                  Style="{ThemeResource AppBarButtonRevealStyle}">
+                                    <AppBarButton.Icon>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB3C;" />
+                                    </AppBarButton.Icon>
+                                </AppBarButton>
+                            </StackPanel>
+                        </toolkit:DockPanel>
+
+                        <toolkit:DockPanel>
+                            <Border Style="{StaticResource RibbonSeparator}" toolkit:DockPanel.Dock="Right"/>
+                            <TextBlock Text="Font" Style="{StaticResource RibbonGroupHeader}"/>
+
+                            <ComboBox x:Name="FontSizeBox" Margin="0,5,0,5" IsEditable="True">
+                                <ComboBoxItem Content="6"/>
+                                <ComboBoxItem Content="8"/>
+                                <ComboBoxItem Content="10"/>
+                                <ComboBoxItem Content="11"/>
+                                <ComboBoxItem Content="12"/>
+                                <ComboBoxItem Content="14"/>
+                                <ComboBoxItem Content="16"/>
+                                <ComboBoxItem Content="18"/>
+                                <ComboBoxItem Content="20"/>
+                                <ComboBoxItem Content="22"/>
+                                <ComboBoxItem Content="24"/>
+                                <ComboBoxItem Content="28"/>
+                                <ComboBoxItem Content="32"/>
+                                <ComboBoxItem Content="48"/>
+                                <ComboBoxItem Content="72"/>
+                            </ComboBox>
+
+                            <AppBarButton Icon="Rename" Label="Text"
+                                      Style="{ThemeResource AppBarButtonRevealStyle}"/>
+                            <AppBarButton Icon="Bold" Label="Bold"
+                                      Style="{ThemeResource AppBarButtonRevealStyle}"/>
+                            <AppBarButton Icon="Italic" Label="Italic"
+                                      Style="{ThemeResource AppBarButtonRevealStyle}"/>
+                            <AppBarButton Icon="Underline" Label="Underline"
+                                      Style="{ThemeResource AppBarButtonRevealStyle}"/>
+                        </toolkit:DockPanel>
+
+                        <toolkit:DockPanel>
+                            <AppBarButton Icon="List" Label="List"
+                                      Style="{ThemeResource AppBarButtonRevealStyle}"/>
+                        </toolkit:DockPanel>
+                    </StackPanel>
+                </Grid>
+            </winui:TabViewItem>
+
+            <winui:TabViewItem Header="Insert">
+                <StackPanel Orientation="Horizontal">
+                    <toolkit:DockPanel>
+                        <Border Style="{StaticResource RibbonSeparator}" toolkit:DockPanel.Dock="Right"/>
+                        <TextBlock Text="Graphing" Style="{StaticResource RibbonGroupHeader}"/>
+
+                        <ribbon:RibbonSplitButton Icon="Street" Label="Home"/>
+                    </toolkit:DockPanel>
+                </StackPanel>
+            </winui:TabViewItem>
+
+        </winui:TabView>
+        <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Background="Transparent">
+            <FontIcon Glyph="&#xE70E;" FontSize="12"/>
+        </Button>
+
+        <Viewbox Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+            <Rectangle Fill="White" Width="16" Height="9"/>
+        </Viewbox>
+    </Grid>
+    
+</Page>
