@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Media;
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 {
-    public sealed class RibbonSplitButton : Control
+    public sealed class RibbonSplitButton : SplitButton
     {
         public RibbonSplitButton()
         {

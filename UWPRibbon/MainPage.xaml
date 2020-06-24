@@ -83,7 +83,7 @@
                         <Border Style="{StaticResource RibbonSeparator}" toolkit:DockPanel.Dock="Right"/>
                         <TextBlock Text="Clipboard" Style="{StaticResource RibbonGroupHeader}"/>
 
-                        <ribbon:RibbonDropDownButton Icon="Paste" Label="Paste" Margin="0,0,2,0">
+                        <ribbon:RibbonDropDownButton Icon="Paste" Label="Paste" Margin="0,0,2,0" ToolTipService.ToolTip="Paste">
                             <ribbon:RibbonDropDownButton.Flyout>
                                 <MenuFlyout>
                                     <MenuFlyoutItem Icon="Font" Text="Use destination theme"/>
@@ -98,7 +98,7 @@
                             </ribbon:RibbonDropDownButton.Flyout>
                         </ribbon:RibbonDropDownButton>
 
-                        <!--<toolkit:UniformGrid Columns="1" RowSpacing="1">
+                        <toolkit:UniformGrid Columns="1" RowSpacing="1">
                             <ribbon:RibbonDropDownButton Icon="PreviewLink" IsCompact="True"/>
                             <ribbon:RibbonButton Icon="ClearSelection" IsCompact="True"/>
                             <ribbon:RibbonDropDownButton IsCompact="True">
@@ -111,23 +111,22 @@
                                     </Flyout>
                                 </ribbon:RibbonDropDownButton.Flyout>
                             </ribbon:RibbonDropDownButton>
-                        </toolkit:UniformGrid>-->
+                        </toolkit:UniformGrid>
                     </toolkit:DockPanel>
-
 
                     <toolkit:DockPanel>
                         <Border Style="{StaticResource RibbonSeparator}" toolkit:DockPanel.Dock="Right"/>
                         <TextBlock Text="Slides" Style="{StaticResource RibbonGroupHeader}"/>
 
-                        <ribbon:RibbonDropDownButton Icon="Add" Label="New Slide" Margin="0,0,2,0">
-                            <ribbon:RibbonDropDownButton.Flyout>
+                        <winui:DropDownButton Content="New Slide" Margin="0,0,2,0">
+                            <winui:DropDownButton.Flyout>
                                 <MenuFlyout>
                                     <MenuFlyoutItem Text="Send"/>
                                     <MenuFlyoutItem Text="Reply"/>
                                     <MenuFlyoutItem Text="Reply All"/>
                                 </MenuFlyout>
-                            </ribbon:RibbonDropDownButton.Flyout>
-                        </ribbon:RibbonDropDownButton>
+                            </winui:DropDownButton.Flyout>
+                        </winui:DropDownButton>
                         
                         <!--<toolkit:UniformGrid Columns="1" RowSpacing="1">
                             <ribbon:RibbonDropDownButton Icon="PreviewLink" Label="Layout" IsCompact="True"/>
