@@ -35,13 +35,15 @@
                             <converters:BoolToOrientationConverter x:Key="BoolToOrientationKey"/>
                             <converters:BoolToCenterAlignmentConverter x:Key="BoolToCenterAlignmentKey"/>
                             <tkconverters:StringVisibilityConverter x:Key="StringVisibilityKey"/>
+                            <converters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
                         </Border.Resources>
 
                         <StackPanel x:Name="ContentPanel" VerticalAlignment="Center"
                                     HorizontalAlignment="{Binding IsCompact, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BoolToCenterAlignmentKey}}"
                                     Orientation="{Binding IsCompact, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BoolToOrientationKey}}"
                                     Spacing="5" Padding="2">
-                            <Viewbox x:Name="IconBox" MaxWidth="16" MaxHeight="16">
+                            <Viewbox x:Name="IconBox" MaxWidth="16" MaxHeight="16"
+                                     Visibility="{Binding Icon, Converter={StaticResource NullVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}">
                                 <ContentPresenter x:Name="IconPresenter"
                                                   Content="{TemplateBinding Icon}"
                                                   Foreground="{TemplateBinding Foreground}" />
@@ -114,15 +116,20 @@
                         <Border.Resources>
                             <converters:BoolToOrientationConverter x:Key="BoolToOrientationKey"/>
                             <tkconverters:StringVisibilityConverter x:Key="StringVisibilityKey"/>
+                            <converters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
                         </Border.Resources>
 
                         <StackPanel x:Name="ContentPanel" VerticalAlignment="Center" HorizontalAlignment="Left"
                                     Orientation="{Binding IsCompact, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BoolToOrientationKey}}"
                                     Spacing="5" Padding="2">
-                            <Viewbox x:Name="IconBox" MaxWidth="20" MaxHeight="20">
+                            <Viewbox x:Name="IconBox"
+                                     MaxWidth="{ThemeResource TabViewItemHeaderIconSize}"
+                                     MaxHeight="{ThemeResource TabViewItemHeaderIconSize}"
+                                     Margin="{ThemeResource TabViewItemHeaderIconMargin}"
+                                     Visibility="{Binding Icon, Converter={StaticResource NullVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}">
                                 <ContentPresenter x:Name="IconPresenter"
-                                                  Content="{TemplateBinding Icon}"
-                                                  Foreground="{TemplateBinding Foreground}" />
+                                          Content="{TemplateBinding Icon}"
+                                          Foreground="{TemplateBinding Foreground}" />
                             </Viewbox>
                             <Grid>
                                 <Grid.ColumnDefinitions>
