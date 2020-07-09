@@ -26,7 +26,8 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
             typeof(RibbonDropDownButton),
             new PropertyMetadata(new SymbolIcon(Symbol.Add))
         );
-        public IconElement Icon {
+        public IconElement Icon
+        {
             get { return (IconElement)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
@@ -37,7 +38,8 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
             typeof(RibbonDropDownButton),
             new PropertyMetadata("")
         );
-        public string Label {
+        public string Label
+        {
             get { return (string)GetValue(LabelProperty); }
             set { SetValue(LabelProperty, value); }
         }
@@ -48,7 +50,8 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
             typeof(RibbonDropDownButton),
             new PropertyMetadata(false)
         );
-        public bool IsCompact {
+        public bool IsCompact
+        {
             get { return (bool)GetValue(IsCompactProperty); }
             set { SetValue(IsCompactProperty, value); }
         }

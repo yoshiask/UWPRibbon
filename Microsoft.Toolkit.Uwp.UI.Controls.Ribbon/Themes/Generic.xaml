@@ -106,13 +106,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local:RibbonDropDownButton">
                     <Border x:Name="RootBorder"
-                        MaxWidth="{TemplateBinding MaxWidth}"
-                        MaxHeight="{TemplateBinding MaxHeight}"
-                        Width="{TemplateBinding Width}"
-                        Height="{TemplateBinding Height}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            MaxHeight="{TemplateBinding MaxHeight}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <Border.Resources>
                             <converters:BoolToOrientationConverter x:Key="BoolToOrientationKey"/>
                             <tkconverters:StringVisibilityConverter x:Key="StringVisibilityKey"/>
