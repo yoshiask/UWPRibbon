@@ -9,40 +9,31 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
     {
         public RibbonButton()
         {
-            this.DefaultStyleKey = typeof(RibbonButton);
+            DefaultStyleKey = typeof(RibbonButton);
         }
 
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
-            "Icon",
-            typeof(IconElement),
-            typeof(RibbonButton),
-            new PropertyMetadata(new SymbolIcon(Symbol.Add))
+            "Icon", typeof(IconElement), typeof(RibbonButton), new PropertyMetadata(new SymbolIcon(Symbol.Add))
         );
         public IconElement Icon {
-            get { return (IconElement)GetValue(IconProperty); }
-            set { SetValue(IconProperty, value); }
+            get => (IconElement)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
-            "Label",
-            typeof(string),
-            typeof(RibbonButton),
-            new PropertyMetadata("")
+            "Label", typeof(string), typeof(RibbonButton), new PropertyMetadata("")
         );
         public string Label {
-            get { return (string)GetValue(LabelProperty); }
-            set { SetValue(LabelProperty, value); }
+            get => (string)GetValue(LabelProperty);
+            set => SetValue(LabelProperty, value);
         }
 
         public static readonly DependencyProperty IsCompactProperty = DependencyProperty.Register(
-            "IsCompact",
-            typeof(bool),
-            typeof(RibbonButton),
-            new PropertyMetadata(false)
+            "IsCompact", typeof(bool), typeof(RibbonButton), new PropertyMetadata(false)
         );
         public bool IsCompact {
-            get { return (bool)GetValue(IsCompactProperty); }
-            set { SetValue(IsCompactProperty, value); }
+            get => (bool)GetValue(IsCompactProperty);
+            set => SetValue(IsCompactProperty, value);
         }
     }
 
