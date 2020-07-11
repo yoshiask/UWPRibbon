@@ -4,7 +4,8 @@
     xmlns:local="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon"
     xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon.Converters"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:tkconverters="using:Microsoft.Toolkit.Uwp.UI.Converters">
+    xmlns:tkconverters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
@@ -106,13 +107,15 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local:RibbonDropDownButton">
                     <Border x:Name="RootBorder"
-                        MaxWidth="{TemplateBinding MaxWidth}"
-                        MaxHeight="{TemplateBinding MaxHeight}"
-                        Width="{TemplateBinding Width}"
-                        Height="{TemplateBinding Height}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            MaxHeight="{TemplateBinding MaxHeight}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <Border.Resources>
                             <converters:BoolToOrientationConverter x:Key="BoolToOrientationKey"/>
                             <tkconverters:StringVisibilityConverter x:Key="StringVisibilityKey"/>
@@ -128,8 +131,8 @@
                                      Margin="{ThemeResource TabViewItemHeaderIconMargin}"
                                      Visibility="{Binding Icon, Converter={StaticResource NullVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}">
                                 <ContentPresenter x:Name="IconPresenter"
-                                          Content="{TemplateBinding Icon}"
-                                          Foreground="{TemplateBinding Foreground}" />
+                                                  Content="{TemplateBinding Icon}"
+                                                  Foreground="{TemplateBinding Foreground}" />
                             </Viewbox>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -477,7 +480,7 @@
                     <toolkit:DockPanel Background="{TemplateBinding Background}" LastChildFill="True">
                         <Border Style="{StaticResource RibbonSeparator}" toolkit:DockPanel.Dock="Right"/>
                         <TextBlock Text="{TemplateBinding Label}" Style="{StaticResource RibbonGroupHeader}"/>
-                        <ItemsPresenter/>
+                        <ItemsControl ItemsSource="{TemplateBinding ItemsSource}"/>
                     </toolkit:DockPanel>
                 </ControlTemplate>
             </Setter.Value>
@@ -507,5 +510,33 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="local:TabbedCommandBar">
+        <!--<Setter Property="TabAreaBackground" Value="{ThemeResource AppBarBackgroundThemeBrush}"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:TabbedCommandBar">
+                    <winui:TabView CanDragTabs="False" CanReorderTabs="False" TabWidthMode="SizeToContent"
+                                   IsAddTabButtonVisible="False" Background="{TemplateBinding Background}"
+                                   TabItemsSource="{TemplateBinding RibbonItemsSource}">
+                        <winui:TabView.TabItemTemplate>
+                            <DataTemplate>
+                                <winui:TabViewItem Header="{Binding Header}">
+                                    <CommandBar Content="{Binding}" HorizontalAlignment="Stretch"/>
+                                </winui:TabViewItem>
+                            </DataTemplate>
+                        </winui:TabView.TabItemTemplate>
+                    </winui:TabView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:TabbedCommandBarItem" BasedOn="{StaticResource CommandBarRevealStyle}">
+        <Setter Property="IsDynamicOverflowEnabled" Value="False"/>
+        <Setter Property="OverflowButtonVisibility" Value="Collapsed"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="DefaultLabelPosition" Value="Right"/>
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
     </Style>
 </ResourceDictionary>

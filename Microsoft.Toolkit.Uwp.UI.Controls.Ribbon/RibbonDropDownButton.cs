@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Media;
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 {
-    public sealed class RibbonDropDownButton : DropDownButton
+    public sealed class RibbonDropDownButton : DropDownButton, IRibbonButton
     {
         public RibbonDropDownButton()
         {

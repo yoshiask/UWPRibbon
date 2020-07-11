@@ -27,7 +27,7 @@ namespace UWPRibbon
         public MainPage()
         {
             this.InitializeComponent();
-
+            
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
             ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
