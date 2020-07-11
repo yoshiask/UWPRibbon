@@ -51,7 +51,7 @@
                             </Viewbox>
                             <TextBlock x:Name="LabelBlock" Text="{TemplateBinding Label}"
                                        Foreground="{TemplateBinding Foreground}" FontSize="12"
-                                       Visibility="{Binding Label, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource StringVisibilityKey}}"/>
+                                       Visibility="{Binding Label, Converter={StaticResource NullVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </StackPanel>
 
                         <VisualStateManager.VisualStateGroups>
@@ -143,7 +143,7 @@
                                 <TextBlock x:Name="LabelBlock" FontSize="12" Grid.Column="0"
                                            TextWrapping="Wrap" Text="{TemplateBinding Label}"
                                            Foreground="{TemplateBinding Foreground}"
-                                           Visibility="{Binding Label, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource StringVisibilityKey}}"/>
+                                           Visibility="{Binding Label, Converter={StaticResource NullVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 <FontIcon Glyph="&#xE70D;" Foreground="{TemplateBinding Foreground}"
                                           FontSize="10" Margin="6,0,0,0"  Grid.Column="1"/>
                             </Grid>
@@ -514,6 +514,7 @@
 
     <Style TargetType="local:TabbedCommandBar">
         <!--<Setter Property="TabAreaBackground" Value="{ThemeResource AppBarBackgroundThemeBrush}"/>-->
+        <Setter Property="Background" Value="{ThemeResource CommandBarBackground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:TabbedCommandBar">
@@ -522,8 +523,10 @@
                                    TabItemsSource="{TemplateBinding RibbonItemsSource}">
                         <winui:TabView.TabItemTemplate>
                             <DataTemplate>
-                                <winui:TabViewItem Header="{Binding Header}">
-                                    <CommandBar Content="{Binding}" HorizontalAlignment="Stretch"/>
+                                <winui:TabViewItem Header="{Binding Label}">
+                                    <Grid Background="{Binding Background}" HorizontalAlignment="Stretch">
+                                        <ContentControl Content="{Binding}"/>
+                                    </Grid>
                                 </winui:TabViewItem>
                             </DataTemplate>
                         </winui:TabView.TabItemTemplate>

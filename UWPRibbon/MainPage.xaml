@@ -9,7 +9,7 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:ribbon="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon"
     mc:Ignorable="d"
-    RequestedTheme="Light"
+    RequestedTheme="Dark"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
@@ -26,8 +26,17 @@
         </StackPanel>
 
         <winui:TabView CanDragTabs="False" CanReorderTabs="False" TabWidthMode="SizeToContent" Grid.Row="1"
-                       IsAddTabButtonVisible="False" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}">
+                       IsAddTabButtonVisible="False" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}"
+                       VerticalAlignment="Stretch">
 
+            <winui:TabView.TabStripFooter>
+                <ToggleButton VerticalAlignment="Stretch" HorizontalAlignment="Right"
+                              Background="Transparent" IsChecked="True" CornerRadius="0"
+                              Width="46">
+                    <FontIcon Glyph="&#xE011;"/>
+                </ToggleButton>
+            </winui:TabView.TabStripFooter>
+            
             <!-- Each TabViewItem is one ribbon tab --> 
             <winui:TabViewItem Header="Home" IsClosable="False" Background="Red">
                 <Grid Background="{ThemeResource TabViewItemHeaderBackgroundSelected}">
@@ -90,7 +99,7 @@
 
         <ribbon:TabbedCommandBar Grid.Row="2" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}">
             <ribbon:TabbedCommandBar.RibbonItemsSource>
-                <ribbon:TabbedCommandBarItem Header="Home">
+                <ribbon:TabbedCommandBarItem Label="Home">
                     <AppBarButton Icon="Cut" Label="Cut"/>
                     <AppBarButton Icon="Copy" Label="Copy"/>
                     <AppBarButton Icon="Paste" Label="Paste"/>
@@ -102,7 +111,7 @@
                     <AppBarButton Icon="List" Label="Properties"/>
                     <AppBarButton Icon="OpenWith" Label="Open with"/>
                 </ribbon:TabbedCommandBarItem>
-                <ribbon:TabbedCommandBarItem Header="Insert">
+                <ribbon:TabbedCommandBarItem Label="Insert">
                     <AppBarElementContainer>
                         <ComboBox>
                             <ComboBoxItem Content="Segoe UI"/>

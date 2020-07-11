@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
@@ -10,13 +11,14 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
             DefaultStyleKey = typeof(TabbedCommandBarItem);
         }
 
-        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
-            "Header", typeof(string), typeof(TabbedCommandBarItem), new PropertyMetadata("")
+        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
+            "Label", typeof(string), typeof(TabbedCommandBarItem), new PropertyMetadata("")
         );
-        public string Header
+        public string Label
         {
-            get => (string)GetValue(HeaderProperty);
-            set => SetValue(HeaderProperty, value);
+            get => (string)GetValue(LabelProperty);
+            set => SetValue(LabelProperty, value);
         }
+
     }
 }
