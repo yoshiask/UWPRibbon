@@ -29,6 +29,7 @@
                        IsAddTabButtonVisible="False" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}"
                        VerticalAlignment="Stretch">
 
+            <!-- This is the Collapse button -->
             <winui:TabView.TabStripFooter>
                 <ToggleButton VerticalAlignment="Stretch" HorizontalAlignment="Right"
                               Background="Transparent" IsChecked="True" CornerRadius="0"
@@ -37,6 +38,37 @@
                 </ToggleButton>
             </winui:TabView.TabStripFooter>
             
+            <!-- Each TabViewItem is one ribbon tab -->
+            <winui:TabViewItem Header="WCT Home" IsClosable="False" Background="Red">
+                <Grid Background="{ThemeResource TabViewItemHeaderBackgroundSelected}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Orientation="Horizontal" Spacing="0">
+                        <!-- Each grid in this StackPanel is a ribbon group -->
+                        <ribbon:RibbonGroup>
+                            <ribbon:RibbonDropDownButton Icon="Paste" Label="Paste" Margin="0,0,2,0"/>
+
+                            <ribbon:RibbonColumn>
+                                <ribbon:RibbonDropDownButton Icon="PreviewLink" IsCompact="True"/>
+                                <ribbon:RibbonButton Icon="ClearSelection" IsCompact="True"/>
+                                <ribbon:RibbonDropDownButton IsCompact="True">
+                                    <ribbon:RibbonDropDownButton.Icon>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEDFB;" />
+                                    </ribbon:RibbonDropDownButton.Icon>
+                                </ribbon:RibbonDropDownButton>
+                            </ribbon:RibbonColumn>
+                        </ribbon:RibbonGroup>
+                    </StackPanel>
+                    
+                    <Button Background="Transparent" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Padding="1" CornerRadius="0">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE010;" FontSize="12" />
+                    </Button>
+                </Grid>
+            </winui:TabViewItem>
             <!-- Each TabViewItem is one ribbon tab --> 
             <winui:TabViewItem Header="Home" IsClosable="False" Background="Red">
                 <Grid Background="{ThemeResource TabViewItemHeaderBackgroundSelected}">

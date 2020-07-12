@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 {
-    public sealed class RibbonGroup : ListViewBase
+    public sealed class RibbonGroup : ItemsControl
     {
         public RibbonGroup()
         {

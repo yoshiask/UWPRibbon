@@ -474,14 +474,40 @@
     
     <!--TODO-->
     <Style TargetType="local:RibbonGroup">
+        <Setter Property="BorderBrush" Value="{ThemeResource AppBarSeparatorForegroundThemeBrush}"/>
+        <Setter Property="BorderThickness" Value="0.5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RibbonGroup">
-                    <toolkit:DockPanel Background="{TemplateBinding Background}" LastChildFill="True">
-                        <Border Style="{StaticResource RibbonSeparator}" toolkit:DockPanel.Dock="Right"/>
-                        <TextBlock Text="{TemplateBinding Label}" Style="{StaticResource RibbonGroupHeader}"/>
-                        <ItemsControl ItemsSource="{TemplateBinding ItemsSource}"/>
-                    </toolkit:DockPanel>
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- All ribbon buttons go here -->
+                        <StackPanel Orientation="Horizontal">
+                            <ItemsPresenter VerticalAlignment="Stretch"/>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{TemplateBinding Label}" FontSize="12" HorizontalTextAlignment="Center"/>
+                            <Button Grid.Column="1" Background="Transparent" HorizontalAlignment="Right" Padding="1" CornerRadius="0">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE741;" FontSize="12" />
+                            </Button>
+                        </Grid>
+
+                        <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                                Margin="5" Grid.Column="1" Grid.RowSpan="2"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -499,12 +525,13 @@
     </Style>
 
     <!--TODO-->
-    <Style TargetType="local:RibbonColumn" >
+    <Style TargetType="local:RibbonColumn">
         <Setter Property="Spacing" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RibbonColumn">
-                    <toolkit:UniformGrid x:Name="RootGrid" Columns="1" RowSpacing="{TemplateBinding Spacing}">
+                    <toolkit:UniformGrid x:Name="RootGrid" Columns="1" RowSpacing="{Binding Spacing}"
+                                         VerticalAlignment="{TemplateBinding VerticalAlignment}">
                         <ItemsPresenter/>
                     </toolkit:UniformGrid>
                 </ControlTemplate>
