@@ -541,7 +541,7 @@
 
     <Style TargetType="local:TabbedCommandBar">
         <!--<Setter Property="TabAreaBackground" Value="{ThemeResource AppBarBackgroundThemeBrush}"/>-->
-        <Setter Property="Background" Value="{ThemeResource CommandBarBackground}"/>
+        <Setter Property="Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:TabbedCommandBar">
@@ -550,8 +550,8 @@
                                    TabItemsSource="{TemplateBinding RibbonItemsSource}">
                         <winui:TabView.TabItemTemplate>
                             <DataTemplate>
-                                <winui:TabViewItem Header="{Binding Label}">
-                                    <Grid Background="{Binding Background}" HorizontalAlignment="Stretch">
+                                <winui:TabViewItem Header="{Binding Label}" IsClosable="False">
+                                    <Grid Background="{Binding Background}">
                                         <ContentControl Content="{Binding}"/>
                                     </Grid>
                                 </winui:TabViewItem>
@@ -568,5 +568,6 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="DefaultLabelPosition" Value="Right"/>
         <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}"/>
     </Style>
 </ResourceDictionary>
