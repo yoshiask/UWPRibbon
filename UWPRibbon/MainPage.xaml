@@ -9,7 +9,7 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:ribbon="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon"
     mc:Ignorable="d"
-    RequestedTheme="Light"
+    RequestedTheme="Dark"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
@@ -31,6 +31,7 @@
 
             <winui:TabView.Resources>
                 <SolidColorBrush x:Key="TabViewItemHeaderBackgroundSelected" Color="{ThemeResource SystemChromeMediumColor}" />
+                <SolidColorBrush x:Key="TabViewItemHeaderForeground" Color="{ThemeResource SystemChromeMediumColor}" />
             </winui:TabView.Resources>
             <!--This is the Collapse button-->
             <winui:TabView.TabStripFooter>
@@ -42,7 +43,7 @@
             </winui:TabView.TabStripFooter>
 
             <!-- Each TabViewItem is one ribbon tab -->
-            <winui:TabViewItem Header="Home" IsClosable="False">
+            <winui:TabViewItem Header="Custom Layout" IsClosable="False">
                 <Grid Background="{ThemeResource TabViewItemHeaderBackgroundSelected}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -100,7 +101,7 @@
             </winui:TabViewItem>
 
             <!-- Each TabViewItem is one ribbon tab -->
-            <winui:TabViewItem Header="WCT Home" IsClosable="False">
+            <winui:TabViewItem Header="WCT Layout Controls" IsClosable="False">
                 <Grid Background="{ThemeResource TabViewItemHeaderBackgroundSelected}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -133,8 +134,23 @@
 
         </winui:TabView>
 
-        <!--<ribbon:TabbedCommandBar Grid.Row="1" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}">
-            <ribbon:TabbedCommandBar.RibbonItemsSource>
+        <Pivot Grid.Row="2" ItemsSource="{x:Bind RibbonItems, Mode=OneWay}">
+            <Pivot.HeaderTemplate>
+                <DataTemplate x:DataType="ribbon:TabbedCommandBarItem">
+                    <TextBlock Text="Test"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <Pivot.ItemTemplate>
+                <DataTemplate x:DataType="ribbon:TabbedCommandBarItem">
+                    <Grid Background="{x:Bind Background, Mode=OneWay}">
+                        <ContentControl Content="Test" Background="{x:Bind Background, Mode=OneWay}"/>
+                    </Grid>
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+        </Pivot>
+
+        <!--<ribbon:TabbedCommandBar Grid.Row="2" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}">
+            <ribbon:TabbedCommandBar.RibbonItems>
                 <ribbon:TabbedCommandBarItem Label="Home">
                     <AppBarButton Icon="Cut" Label="Cut"/>
                     <AppBarButton Icon="Copy" Label="Copy"/>
@@ -146,6 +162,10 @@
                     <AppBarSeparator/>
                     <AppBarButton Icon="List" Label="Properties"/>
                     <AppBarButton Icon="OpenWith" Label="Open with"/>
+
+                    <ribbon:TabbedCommandBarItem.Footer>
+                        <Rectangle Fill="Blue" Width="20"/>
+                    </ribbon:TabbedCommandBarItem.Footer>
                 </ribbon:TabbedCommandBarItem>
                 <ribbon:TabbedCommandBarItem Label="Insert">
                     <AppBarElementContainer>
@@ -159,7 +179,7 @@
                     <AppBarButton Icon="FontIncrease"/>
                     <AppBarButton Icon="FontDecrease"/>
                 </ribbon:TabbedCommandBarItem>
-            </ribbon:TabbedCommandBar.RibbonItemsSource>
+            </ribbon:TabbedCommandBar.RibbonItems>
         </ribbon:TabbedCommandBar>-->
         
     </Grid>
@@ -330,8 +350,12 @@
                                     <ContentControl x:Name="IconControl" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TabViewTemplateSettings.IconElement}" IsTabStop="False" Foreground="{ThemeResource TabViewItemIconForeground}" HighContrastAdjustment="None" />
                                 </Viewbox>
                                 <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontWeight="{TemplateBinding FontWeight}" FontSize="{ThemeResource TabViewItemHeaderFontSize}" OpticalMarginAlignment="TrimSideBearings" HighContrastAdjustment="None" />
-                                <Grid Grid.Row="1" Height="3" Grid.ColumnSpan="3">
-                                    <Rectangle x:Name="SelectionIndicator" Fill="Transparent" RadiusX="1.5" RadiusY="2"/>
+                                <Grid Grid.Row="1" Height="1.5" Grid.ColumnSpan="3">
+                                    <Rectangle x:Name="SelectionIndicator" Fill="Transparent" RadiusX="1.5" RadiusY="2">
+                                        <Rectangle.ScaleTransition>
+                                            <Vector3Transition />
+                                        </Rectangle.ScaleTransition>
+                                    </Rectangle>
                                 </Grid>
                             </Grid>
                         </Grid>

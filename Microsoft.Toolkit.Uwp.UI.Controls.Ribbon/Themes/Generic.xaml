@@ -491,7 +491,7 @@
 
                         <!-- All ribbon buttons go here -->
                         <StackPanel Orientation="Horizontal">
-                            <ItemsPresenter VerticalAlignment="Stretch"/>
+                            <ItemsPresenter VerticalAlignment="Stretch" />
                         </StackPanel>
 
                         <Grid Grid.Row="1">
@@ -545,29 +545,30 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:TabbedCommandBar">
-                    <winui:TabView CanDragTabs="False" CanReorderTabs="False" TabWidthMode="SizeToContent"
-                                   IsAddTabButtonVisible="False" Background="{TemplateBinding Background}"
-                                   TabItemsSource="{TemplateBinding RibbonItemsSource}">
-                        <winui:TabView.TabItemTemplate>
+                    <Pivot Background="{TemplateBinding Background}" ItemsSource="{Binding RibbonItems, Mode=OneWay}">
+                        <Pivot.HeaderTemplate>
                             <DataTemplate>
-                                <winui:TabViewItem Header="{Binding Label}" IsClosable="False">
-                                    <Grid Background="{Binding Background}">
-                                        <ContentControl Content="{Binding}"/>
-                                    </Grid>
-                                </winui:TabViewItem>
+                                <TextBlock Text="Sanity check" FontSize="14"/>
                             </DataTemplate>
-                        </winui:TabView.TabItemTemplate>
-                    </winui:TabView>
+                        </Pivot.HeaderTemplate>
+                        <Pivot.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Background="{Binding Background, Mode=OneWay}">
+                                    <ContentControl Content="{Binding}" Background="{Binding Background, Mode=OneWay}"/>
+                                        
+                                    <!--TODO: This is supposed to be the footer, yet nothing displays-->
+                                    <ContentControl Content="{Binding Footer, Mode=OneWay}" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </DataTemplate>
+                        </Pivot.ItemTemplate>
+                    </Pivot>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
     <Style TargetType="local:TabbedCommandBarItem" BasedOn="{StaticResource CommandBarRevealStyle}">
-        <Setter Property="IsDynamicOverflowEnabled" Value="False"/>
-        <Setter Property="OverflowButtonVisibility" Value="Collapsed"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="DefaultLabelPosition" Value="Right"/>
-        <Setter Property="FlowDirection" Value="LeftToRight"/>
         <Setter Property="Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}"/>
     </Style>
 </ResourceDictionary>
