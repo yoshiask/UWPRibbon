@@ -142,9 +142,6 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
       <Version>7.0.0-preview1</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.5.0-prerelease.200609001</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Themes\Generic.xaml">
