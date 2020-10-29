@@ -5,12 +5,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 {
-    public class TabbedCommandBar : Control
+    public class TabbedCommandBar : ItemsControl
     {
         public TabbedCommandBar()
         {
             DefaultStyleKey = typeof(TabbedCommandBar);
-            //Items.VectorChanged += Items_VectorChanged;
+            Items.VectorChanged += Items_VectorChanged;
             RibbonItems.Add(new TabbedCommandBarItem()
             {
                 Label = "Home"
@@ -40,6 +40,13 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         {
             get => (ObservableCollection<TabbedCommandBarItem>)GetValue(RibbonItemsProperty);
             set => SetValue(RibbonItemsProperty, value);
+        }
+
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            GetTemplateChild("PART_");
         }
     }
 }

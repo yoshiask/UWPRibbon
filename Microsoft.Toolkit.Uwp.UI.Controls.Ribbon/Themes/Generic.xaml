@@ -541,27 +541,31 @@
 
     <Style TargetType="local:TabbedCommandBar">
         <!--<Setter Property="TabAreaBackground" Value="{ThemeResource AppBarBackgroundThemeBrush}"/>-->
-        <Setter Property="Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}"/>
+        <Setter Property="Background" Value="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:TabbedCommandBar">
-                    <Pivot Background="{TemplateBinding Background}" ItemsSource="{Binding RibbonItems, Mode=OneWay}">
-                        <Pivot.HeaderTemplate>
+                    <NavigationView Style="{StaticResource RibbonTabNavigationViewStyle}" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed"
+                                    Background="{TemplateBinding Background}" MenuItemsSource="{Binding Items}">
+                        <!--<NavigationView.Resources>
+                            <StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="Background"/>
+                        </NavigationView.Resources>-->
+                        <NavigationView.MenuItems>
+                            <NavigationViewItem Content="Home"/>
+                            <NavigationViewItem Content="Insert"/>
+                            <NavigationViewItem Content="Page Layout"/>
+                            <NavigationViewItem Content="Formulas"/>
+                            <NavigationViewItem Content="Data"/>
+                            <NavigationViewItem Content="Review"/>
+                            <NavigationViewItem Content="View"/>
+                            <NavigationViewItem Content="Help"/>
+                        </NavigationView.MenuItems>
+                        <!--<NavigationView.MenuItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="Sanity check" FontSize="14"/>
+                                <NavigationViewItem Content="Test"/>
                             </DataTemplate>
-                        </Pivot.HeaderTemplate>
-                        <Pivot.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Background="{Binding Background, Mode=OneWay}">
-                                    <ContentControl Content="{Binding}" Background="{Binding Background, Mode=OneWay}"/>
-                                        
-                                    <!--TODO: This is supposed to be the footer, yet nothing displays-->
-                                    <ContentControl Content="{Binding Footer, Mode=OneWay}" HorizontalAlignment="Right"/>
-                                </Grid>
-                            </DataTemplate>
-                        </Pivot.ItemTemplate>
-                    </Pivot>
+                        </NavigationView.MenuItemTemplate>-->
+                    </NavigationView>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

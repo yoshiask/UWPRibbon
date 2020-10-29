@@ -9,145 +9,75 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:ribbon="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon"
     mc:Ignorable="d"
-    RequestedTheme="Dark"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    RequestedTheme="Dark">
 
-    <Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32px"/>
-            <RowDefinition Height="140px"/>
-            <RowDefinition Height="140px"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlebarGrid" Padding="10,0,0,0" Orientation="Horizontal"
-                    Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}">
+                    Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}">
             <TextBlock Text="UWP Ribbon" VerticalAlignment="Center" Foreground="{ThemeResource MediaTextThemeBrush}"/>
         </StackPanel>
 
-        <winui:TabView CanDragTabs="False" CanReorderTabs="False" TabWidthMode="SizeToContent" Grid.Row="1"
-                       IsAddTabButtonVisible="False" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}"
-                       VerticalAlignment="Stretch">
+        <ribbon:TabbedCommandBar Grid.Row="1" Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}">
+            <ribbon:TabbedCommandBar.Resources>
+                <StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SystemControlChromeMediumLowAcrylicWindowMediumBrush"/>
+            </ribbon:TabbedCommandBar.Resources>
 
-            <winui:TabView.Resources>
-                <SolidColorBrush x:Key="TabViewItemHeaderBackgroundSelected" Color="{ThemeResource SystemChromeMediumColor}" />
-                <SolidColorBrush x:Key="TabViewItemHeaderForeground" Color="{ThemeResource SystemChromeMediumColor}" />
-            </winui:TabView.Resources>
-            <!--This is the Collapse button-->
-            <winui:TabView.TabStripFooter>
-                <ToggleButton VerticalAlignment="Stretch" HorizontalAlignment="Right"
-                              Background="Transparent" IsChecked="True" CornerRadius="0"
-                              Width="46">
-                    <FontIcon Glyph="&#xE011;"/>
-                </ToggleButton>
-            </winui:TabView.TabStripFooter>
+            <ribbon:TabbedCommandBarItem>
+                <AppBarButton Icon="Cut" Content="Cut"/>
+            </ribbon:TabbedCommandBarItem>
+        </ribbon:TabbedCommandBar>
 
-            <!-- Each TabViewItem is one ribbon tab -->
-            <winui:TabViewItem Header="Custom Layout" IsClosable="False">
-                <Grid Background="{ThemeResource TabViewItemHeaderBackgroundSelected}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+        <!--<winui:NavigationView Grid.Row="1" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed"
+                              Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}">
+            <winui:NavigationView.Resources>
+                <StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SystemControlChromeMediumLowAcrylicWindowMediumBrush"/>
+            </winui:NavigationView.Resources>
+            <winui:NavigationView.MenuItems>
+                <winui:NavigationViewItem Content="Home"/>
+                <winui:NavigationViewItem Content="Insert"/>
+                <winui:NavigationViewItem Content="Page Layout"/>
+                <winui:NavigationViewItem Content="Formulas"/>
+                <winui:NavigationViewItem Content="Data"/>
+                <winui:NavigationViewItem Content="Review"/>
+                <winui:NavigationViewItem Content="View"/>
+                <winui:NavigationViewItem Content="Help"/>
+            </winui:NavigationView.MenuItems>
+        </winui:NavigationView>-->
 
-                    <StackPanel Orientation="Horizontal" Spacing="0">
-                        <!-- Each grid in this StackPanel is a ribbon group -->
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!-- All ribbon buttons go here -->
-                            <StackPanel Orientation="Horizontal">
-                                <ribbon:RibbonDropDownButton Icon="Paste" Label="Paste" Margin="0,0,2,0"/>
-
-                                <toolkit:UniformGrid Columns="1" RowSpacing="1">
-                                    <ribbon:RibbonDropDownButton Icon="PreviewLink" IsCompact="True"/>
-                                    <ribbon:RibbonButton Icon="ClearSelection" IsCompact="True"/>
-                                    <ribbon:RibbonDropDownButton IsCompact="True">
-                                        <ribbon:RibbonDropDownButton.Icon>
-                                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEDFB;" />
-                                        </ribbon:RibbonDropDownButton.Icon>
-                                    </ribbon:RibbonDropDownButton>
-                                </toolkit:UniformGrid>
-                            </StackPanel>
-
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Clipboard" FontSize="12" HorizontalTextAlignment="Center"/>
-                                <Button Grid.Column="1" Background="Transparent" HorizontalAlignment="Right" Padding="1" CornerRadius="0">
-                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE741;" FontSize="12" />
-                                </Button>
-                            </Grid>
-
-                            <Border BorderThickness="0.5" BorderBrush="{ThemeResource AppBarSeparatorForegroundThemeBrush}"
-                                    Margin="5" Grid.Column="1" Grid.RowSpan="2"/>
-                        </Grid>
-                    </StackPanel>
-
-                    <Button Background="Transparent" VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                            Padding="1" CornerRadius="0">
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE010;" FontSize="12" />
-                    </Button>
-                </Grid>
-            </winui:TabViewItem>
-
-            <!-- Each TabViewItem is one ribbon tab -->
-            <winui:TabViewItem Header="WCT Layout Controls" IsClosable="False">
-                <Grid Background="{ThemeResource TabViewItemHeaderBackgroundSelected}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <StackPanel Orientation="Horizontal" Spacing="0">
-                        <!-- Each grid in this StackPanel is a ribbon group -->
-                        <ribbon:RibbonGroup>
-                            <ribbon:RibbonDropDownButton Icon="Paste" Label="Paste" Margin="0,0,2,0"/>
-
-                            <ribbon:RibbonColumn>
-                                <ribbon:RibbonDropDownButton Icon="PreviewLink" IsCompact="True"/>
-                                <ribbon:RibbonButton Icon="ClearSelection" IsCompact="True"/>
-                                <ribbon:RibbonDropDownButton IsCompact="True">
-                                    <ribbon:RibbonDropDownButton.Icon>
-                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEDFB;" />
-                                    </ribbon:RibbonDropDownButton.Icon>
-                                </ribbon:RibbonDropDownButton>
-                            </ribbon:RibbonColumn>
-                        </ribbon:RibbonGroup>
-                    </StackPanel>
-                    
-                    <Button Background="Transparent" VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                            Padding="1" CornerRadius="0">
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE010;" FontSize="12" />
-                    </Button>
-                </Grid>
-            </winui:TabViewItem>
-
-        </winui:TabView>
-
-        <Pivot Grid.Row="2" ItemsSource="{x:Bind RibbonItems, Mode=OneWay}">
-            <Pivot.HeaderTemplate>
-                <DataTemplate x:DataType="ribbon:TabbedCommandBarItem">
-                    <TextBlock Text="Test"/>
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-            <Pivot.ItemTemplate>
-                <DataTemplate x:DataType="ribbon:TabbedCommandBarItem">
-                    <Grid Background="{x:Bind Background, Mode=OneWay}">
-                        <ContentControl Content="Test" Background="{x:Bind Background, Mode=OneWay}"/>
-                    </Grid>
-                </DataTemplate>
-            </Pivot.ItemTemplate>
-        </Pivot>
+        <Grid Grid.Row="2" Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}">
+            <ContentControl HorizontalAlignment="Stretch">
+                <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right"
+                            Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}">
+                    <AppBarButton Icon="Cut" Label="Cut"/>
+                    <AppBarButton Icon="Copy" Label="Copy"/>
+                    <AppBarButton Icon="Paste" Label="Paste"/>
+                    <AppBarSeparator/>
+                    <AppBarElementContainer HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch">
+                        <ComboBox VerticalAlignment="Stretch" Margin="0,0,0,5">
+                            <ComboBoxItem Content="Segoe UI"/>
+                            <ComboBoxItem Content="JetBrains Mono"/>
+                        </ComboBox>
+                    </AppBarElementContainer>
+                    <AppBarElementContainer HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch">
+                        <ComboBox VerticalAlignment="Stretch" Margin="2.5,0,0,5">
+                            <ComboBoxItem Content="32"/>
+                            <ComboBoxItem Content="36"/>
+                            <ComboBoxItem Content="42"/>
+                        </ComboBox>
+                    </AppBarElementContainer>
+                    <AppBarToggleButton Label="Bold" Icon="Bold"/>
+                    <AppBarToggleButton Label="Italic" Icon="Italic"/>
+                    <AppBarToggleButton Label="Underline" Icon="Underline"/>
+                </CommandBar>
+            </ContentControl>
+        </Grid>
 
         <!--<ribbon:TabbedCommandBar Grid.Row="2" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}">
             <ribbon:TabbedCommandBar.RibbonItems>
