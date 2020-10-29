@@ -1,11 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using Windows.Security.Cryptography.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Markup;
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 {
-    public class TabbedCommandBar : ItemsControl
+    [ContentProperty(Name = nameof(Items))]
+    public class TabbedCommandBar : Control
     {
         private NavigationView RibbonNavigationView = null;
         private ContentControl RibbonContent = null;
@@ -13,10 +18,20 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         // This should probably be made public at some point
         private TabbedCommandBarItem SelectedTab { get; set; }
 
+        public IList<TabbedCommandBarItem> Items
+        {
+            get { return (IList<TabbedCommandBarItem>)GetValue(ItemsProperty); }
+            set { SetValue(ItemsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemsProperty =
+            DependencyProperty.Register(nameof(Items), typeof(IList<TabbedCommandBarItem>), typeof(TabbedCommandBar), new PropertyMetadata(new List<TabbedCommandBarItem>()));
+
         public TabbedCommandBar()
         {
             DefaultStyleKey = typeof(TabbedCommandBar);
-            Items.VectorChanged += Items_VectorChanged;
+            ////Items.VectorChanged += Items_VectorChanged;
             //RibbonItems.Add(new TabbedCommandBarItem()
             //{
             //    Label = "Home"
@@ -81,7 +96,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 
                 // This actually will throw an exception saying that the elemnt already has a parent. I suspect that the parent is
                 // this TabbedCommandBar, so it can't be set as the content here. How do I get around this?
-                //RibbonContent.Content = Items[System.Math.Min(Items.Count - 1, RibbonNavigationView.MenuItems.IndexOf(navItem))];
+                RibbonContent.Content = Items[System.Math.Min(Items.Count - 1, RibbonNavigationView.MenuItems.IndexOf(navItem))];
             }
         }
     }

@@ -82,6 +82,7 @@
         <!-- This is supposed to be the content of the current tab. This is supposed to be in the TabbedCommandBar template,
              with the ContentControl bound to the current TabbedCommandBarItem. -->
         <Grid Grid.Row="2" Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}">
+        <!--<Grid Grid.Row="2" Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}">
             <ContentControl HorizontalAlignment="Stretch">
                 <ribbon:TabbedCommandBarItem Label="Home">
                     <AppBarButton Icon="Cut" Label="Cut"/>
@@ -110,7 +111,7 @@
                     <AppBarToggleButton Label="Underline" Icon="Underline"/>
                 </ribbon:TabbedCommandBarItem>
             </ContentControl>
-        </Grid>
+        </Grid>-->
 
     </Grid>
 
