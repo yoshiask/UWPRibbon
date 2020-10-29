@@ -5,17 +5,16 @@
     xmlns:local="using:UWPRibbon"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     xmlns:ribbon="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon"
     mc:Ignorable="d"
     RequestedTheme="Dark">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32px"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="TitlebarRow" Height="32px"/>
+            <RowDefinition x:Name="RibbonItems" Height="Auto"/>
+            <RowDefinition x:Name="RibbonContent" Height="Auto"/>
+            <RowDefinition x:Name="WindowContent" Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlebarGrid" Padding="10,0,0,0" Orientation="Horizontal"
@@ -25,43 +24,78 @@
 
         <ribbon:TabbedCommandBar Grid.Row="1" Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}">
             <ribbon:TabbedCommandBar.Resources>
+                <!-- Need a way to expose the pane background to the actual Background property of the TabbedCommandBar -->
                 <StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SystemControlChromeMediumLowAcrylicWindowMediumBrush"/>
             </ribbon:TabbedCommandBar.Resources>
 
-            <ribbon:TabbedCommandBarItem>
-                <AppBarButton Icon="Cut" Content="Cut"/>
+            <!-- This is just some sample ribbon content, loosely based on the Excel (Win32) ribbon. -->
+            <ribbon:TabbedCommandBarItem Label="Home">
+                <AppBarButton Icon="Cut" Label="Cut"/>
+                <AppBarButton Icon="Copy" Label="Copy"/>
+                <AppBarButton Icon="Paste" Label="Paste"/>
+                <AppBarSeparator/>
+                <AppBarElementContainer HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch">
+                    <!-- Is there a better way to handle AppBarElementContainers? I shouldn't have to use a weird margin to
+                         make sure the bottom of the content isn't cut off by the command bar. -->
+                    <ComboBox VerticalAlignment="Stretch" Margin="0,0,0,5">
+                        <ComboBoxItem Content="Arial"/>
+                        <ComboBoxItem Content="Calibri"/>
+                        <ComboBoxItem Content="JetBrains Mono"/>
+                        <ComboBoxItem Content="Roboto"/>
+                        <ComboBoxItem Content="Sergio UI"/>
+                        <ComboBoxItem Content="Sergio UI Semibold"/>
+                    </ComboBox>
+                </AppBarElementContainer>
+                <AppBarElementContainer HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch">
+                    <ComboBox VerticalAlignment="Stretch" Margin="2.5,0,0,5">
+                        <ComboBoxItem Content="32"/>
+                        <ComboBoxItem Content="36"/>
+                        <ComboBoxItem Content="42"/>
+                    </ComboBox>
+                </AppBarElementContainer>
+                <AppBarToggleButton Label="Bold" Icon="Bold"/>
+                <AppBarToggleButton Label="Italic" Icon="Italic"/>
+                <AppBarToggleButton Label="Underline" Icon="Underline"/>
+            </ribbon:TabbedCommandBarItem>
+
+            <ribbon:TabbedCommandBarItem Label="Insert">
+                <AppBarButton Label="Pictures" Icon="Pictures">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="This Device">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEC4E;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Text="Stock Images">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Text="Stock Images" Icon="Globe"/>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
             </ribbon:TabbedCommandBarItem>
         </ribbon:TabbedCommandBar>
 
-        <!--<winui:NavigationView Grid.Row="1" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed"
-                              Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}">
-            <winui:NavigationView.Resources>
-                <StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SystemControlChromeMediumLowAcrylicWindowMediumBrush"/>
-            </winui:NavigationView.Resources>
-            <winui:NavigationView.MenuItems>
-                <winui:NavigationViewItem Content="Home"/>
-                <winui:NavigationViewItem Content="Insert"/>
-                <winui:NavigationViewItem Content="Page Layout"/>
-                <winui:NavigationViewItem Content="Formulas"/>
-                <winui:NavigationViewItem Content="Data"/>
-                <winui:NavigationViewItem Content="Review"/>
-                <winui:NavigationViewItem Content="View"/>
-                <winui:NavigationViewItem Content="Help"/>
-            </winui:NavigationView.MenuItems>
-        </winui:NavigationView>-->
-
+        <!-- This is supposed to be the content of the current tab. This is supposed to be in the TabbedCommandBar template,
+             with the ContentControl bound to the current TabbedCommandBarItem. -->
         <Grid Grid.Row="2" Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}">
             <ContentControl HorizontalAlignment="Stretch">
-                <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right"
-                            Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}">
+                <ribbon:TabbedCommandBarItem Label="Home">
                     <AppBarButton Icon="Cut" Label="Cut"/>
                     <AppBarButton Icon="Copy" Label="Copy"/>
                     <AppBarButton Icon="Paste" Label="Paste"/>
                     <AppBarSeparator/>
                     <AppBarElementContainer HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch">
                         <ComboBox VerticalAlignment="Stretch" Margin="0,0,0,5">
-                            <ComboBoxItem Content="Segoe UI"/>
+                            <ComboBoxItem Content="Arial"/>
+                            <ComboBoxItem Content="Calibri"/>
                             <ComboBoxItem Content="JetBrains Mono"/>
+                            <ComboBoxItem Content="Roboto"/>
+                            <ComboBoxItem Content="Sergio UI"/>
+                            <ComboBoxItem Content="Sergio UI Semibold"/>
                         </ComboBox>
                     </AppBarElementContainer>
                     <AppBarElementContainer HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch">
@@ -74,224 +108,10 @@
                     <AppBarToggleButton Label="Bold" Icon="Bold"/>
                     <AppBarToggleButton Label="Italic" Icon="Italic"/>
                     <AppBarToggleButton Label="Underline" Icon="Underline"/>
-                </CommandBar>
+                </ribbon:TabbedCommandBarItem>
             </ContentControl>
         </Grid>
 
-        <!--<ribbon:TabbedCommandBar Grid.Row="2" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}">
-            <ribbon:TabbedCommandBar.RibbonItems>
-                <ribbon:TabbedCommandBarItem Label="Home">
-                    <AppBarButton Icon="Cut" Label="Cut"/>
-                    <AppBarButton Icon="Copy" Label="Copy"/>
-                    <AppBarButton Icon="Paste" Label="Paste"/>
-                    <AppBarSeparator/>
-                    <AppBarButton Icon="Delete" Label="Delete"/>
-                    <AppBarButton Icon="Rename" Label="Rename"/>
-                    <AppBarButton Icon="Add" Label="Add item"/>
-                    <AppBarSeparator/>
-                    <AppBarButton Icon="List" Label="Properties"/>
-                    <AppBarButton Icon="OpenWith" Label="Open with"/>
-
-                    <ribbon:TabbedCommandBarItem.Footer>
-                        <Rectangle Fill="Blue" Width="20"/>
-                    </ribbon:TabbedCommandBarItem.Footer>
-                </ribbon:TabbedCommandBarItem>
-                <ribbon:TabbedCommandBarItem Label="Insert">
-                    <AppBarElementContainer>
-                        <ComboBox>
-                            <ComboBoxItem Content="Segoe UI"/>
-                            <ComboBoxItem Content="Segoe MDL2 Assets"/>
-                            <ComboBoxItem Content="Roboto"/>
-                            <ComboBoxItem Content="JetBrains Mono"/>
-                        </ComboBox>
-                    </AppBarElementContainer>
-                    <AppBarButton Icon="FontIncrease"/>
-                    <AppBarButton Icon="FontDecrease"/>
-                </ribbon:TabbedCommandBarItem>
-            </ribbon:TabbedCommandBar.RibbonItems>
-        </ribbon:TabbedCommandBar>-->
-        
     </Grid>
 
-    <Page.Resources>
-        <Style TargetType="winui:TabViewItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="winui:TabViewItem">
-                        <Grid x:Name="LayoutRoot" Padding="{TemplateBinding Padding}" Margin="-1,0,0,0">
-                            <!-- This item will cover the separator on its left side. -->
-                            <Grid.RenderTransform>
-                                <ScaleTransform x:Name="LayoutRootScale" />
-                            </Grid.RenderTransform>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundPointerOver}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundPointerOver}" />
-                                            <Setter Target="IconControl.Foreground" Value="{ThemeResource TabViewItemIconForegroundPointerOver}" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundPressed}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundPressed}" />
-                                            <Setter Target="IconControl.Foreground" Value="{ThemeResource TabViewItemIconForegroundPressed}" />
-                                            <Setter Target="SelectionIndicator.Fill" Value="{ThemeResource SystemAccentColor}" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundSelected}" />
-                                            <Setter Target="IconControl.Foreground" Value="{ThemeResource TabViewItemIconForegroundSelected}" />
-                                            <Setter Target="SelectionIndicator.Fill" Value="{ThemeResource SystemAccentColor}" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOverSelected">
-                                        <VisualState.Setters>
-                                            <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundPointerOver}" />
-                                            <Setter Target="IconControl.Foreground" Value="{ThemeResource TabViewItemIconForegroundPointerOver}" />
-                                            <Setter Target="SelectionIndicator.Fill" Value="{ThemeResource SystemAccentColorDark2}" />
-                                            <Setter Target="SelectionIndicator.Margin" Value="-5,0,-5,0" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PressedSelected">
-                                        <VisualState.Setters>
-                                            <Setter Target="TabContainer.Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundPressed}" />
-                                            <Setter Target="IconControl.Foreground" Value="{ThemeResource TabViewItemIconForegroundPressed}" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="DisabledStates">
-                                    <VisualState x:Name="Enabled" />
-                                    <VisualState x:Name="Disabled">
-                                        <VisualState.Setters>
-                                            <Setter Target="IconControl.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundDisabled}" />
-                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TabViewItemHeaderForegroundDisabled}" />
-                                            <Setter Target="IconControl.Foreground" Value="{ThemeResource TabViewButtonForegroundDisabled}" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="DataVirtualizationStates">
-                                    <VisualState x:Name="DataAvailable" />
-                                    <VisualState x:Name="DataPlaceholder" />
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="ReorderHintStates">
-                                    <VisualState x:Name="NoReorderHint" />
-                                    <VisualState x:Name="BottomReorderHint">
-                                        <Storyboard>
-                                            <DragOverThemeAnimation Direction="Bottom" ToOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" TargetName="LayoutRoot" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="TopReorderHint">
-                                        <Storyboard>
-                                            <DragOverThemeAnimation Direction="Top" ToOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" TargetName="LayoutRoot" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="RightReorderHint">
-                                        <Storyboard>
-                                            <DragOverThemeAnimation Direction="Right" ToOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" TargetName="LayoutRoot" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="LeftReorderHint">
-                                        <Storyboard>
-                                            <DragOverThemeAnimation Direction="Left" ToOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" TargetName="LayoutRoot" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0:0:0.2" To="NoReorderHint" />
-                                    </VisualStateGroup.Transitions>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="DragStates">
-                                    <VisualState x:Name="NotDragging" />
-                                    <VisualState x:Name="Dragging">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="{ThemeResource ListViewItemDragThemeOpacity}" Duration="0" />
-                                            <DragItemThemeAnimation TargetName="LayoutRoot" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="DraggingTarget" />
-                                    <VisualState x:Name="MultipleDraggingPrimary" />
-                                    <VisualState x:Name="MultipleDraggingSecondary" />
-                                    <VisualState x:Name="DraggedPlaceholder" />
-                                    <VisualState x:Name="Reordering">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="{ThemeResource ListViewItemReorderThemeOpacity}" Duration="0:0:0.240" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="ReorderingTarget">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" To="{ThemeResource ListViewItemReorderTargetThemeOpacity}" Duration="0:0:0.240" />
-                                            <DoubleAnimation Storyboard.TargetName="LayoutRootScale" Storyboard.TargetProperty="ScaleX" To="{ThemeResource ListViewItemReorderTargetThemeScale}" Duration="0:0:0.240" />
-                                            <DoubleAnimation Storyboard.TargetName="LayoutRootScale" Storyboard.TargetProperty="ScaleY" To="{ThemeResource ListViewItemReorderTargetThemeScale}" Duration="0:0:0.240" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="MultipleReorderingPrimary" />
-                                    <VisualState x:Name="ReorderedPlaceholder">
-                                        <Storyboard>
-                                            <FadeOutThemeAnimation TargetName="LayoutRoot" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="DragOver">
-                                        <Storyboard>
-                                            <DropTargetItemThemeAnimation TargetName="LayoutRoot" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0:0:0.2" To="NotDragging" />
-                                    </VisualStateGroup.Transitions>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="IconStates">
-                                    <VisualState x:Name="Icon" />
-                                    <VisualState x:Name="NoIcon">
-                                        <VisualState.Setters>
-                                            <Setter Target="IconBox.Visibility" Value="Collapsed" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="TabWidthModes">
-                                    <VisualState x:Name="StandardWidth" />
-                                    <VisualState x:Name="Compact">
-                                        <VisualState.Setters>
-                                            <Setter Target="IconBox.Margin" Value="0,0,0,0" />
-                                            <Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
-                                            <Setter Target="IconColumn.Width" Value="{ThemeResource TabViewItemHeaderIconSize}" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Border x:Name="TabSeparator" HorizontalAlignment="Right" Width="1" BorderBrush="{ThemeResource TabViewItemSeparator}" BorderThickness="1" Margin="0,6,0,6" />
-                            <Grid x:Name="TabContainer" Grid.Column="1" Background="{ThemeResource TabViewItemHeaderBackground}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Control.IsTemplateFocusTarget="True" Padding="{ThemeResource TabViewItemHeaderPadding}" FocusVisualMargin="{TemplateBinding FocusVisualMargin}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition x:Name="IconColumn" Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Viewbox x:Name="IconBox" MaxWidth="{ThemeResource TabViewItemHeaderIconSize}" MaxHeight="{ThemeResource TabViewItemHeaderIconSize}" Margin="{ThemeResource TabViewItemHeaderIconMargin}">
-                                    <ContentControl x:Name="IconControl" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TabViewTemplateSettings.IconElement}" IsTabStop="False" Foreground="{ThemeResource TabViewItemIconForeground}" HighContrastAdjustment="None" />
-                                </Viewbox>
-                                <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontWeight="{TemplateBinding FontWeight}" FontSize="{ThemeResource TabViewItemHeaderFontSize}" OpticalMarginAlignment="TrimSideBearings" HighContrastAdjustment="None" />
-                                <Grid Grid.Row="1" Height="1.5" Grid.ColumnSpan="3">
-                                    <Rectangle x:Name="SelectionIndicator" Fill="Transparent" RadiusX="1.5" RadiusY="2">
-                                        <Rectangle.ScaleTransition>
-                                            <Vector3Transition />
-                                        </Rectangle.ScaleTransition>
-                                    </Rectangle>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
-    
 </Page>

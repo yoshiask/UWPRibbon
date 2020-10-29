@@ -1,10 +1,7 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls.Ribbon;
-using System.Collections.ObjectModel;
-using Windows.ApplicationModel.Core;
+﻿using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -19,21 +16,11 @@ namespace UWPRibbon
         {
             this.InitializeComponent();
             
+            // Extend into the title bar for maximum cool
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
-            ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
-
-            RibbonItems.Add(new TabbedCommandBarItem()
-            {
-                Label = "Home",
-                Background = new SolidColorBrush(Colors.Blue)
-            });
-            RibbonItems.Add(new TabbedCommandBarItem()
-            {
-                Label = "Insert"
-            });
+            ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Colors.Transparent;
+            ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         }
-
-        public ObservableCollection<TabbedCommandBarItem> RibbonItems { get; set; } = new ObservableCollection<TabbedCommandBarItem>();
     }
 }

@@ -6,6 +6,9 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:tkconverters="using:Microsoft.Toolkit.Uwp.UI.Converters">
 
+    <!-- These Ribbon____ controls work mostly fine on their own, but go completely wonky when placed in a RibbonGroup or RibbonColumn.
+         I don't really remember what was going wrong, so for now I'm just focusing on the TabbedCommandBar. -->
+    
     <Style TargetType="local:RibbonButton">
         <Setter Property="Background" Value="{ThemeResource AppBarItemBackgroundThemeBrush}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -419,40 +422,39 @@
                         <Grid x:Name="Border" Grid.ColumnSpan="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" />
 
                         <Button x:Name="PrimaryButton"
-                            Grid.Column="0"
-                            Foreground="{TemplateBinding Foreground}"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="Transparent"
-                            Content="{TemplateBinding Content}"
-                            ContentTransitions="{TemplateBinding ContentTransitions}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                            Command="{TemplateBinding Command}"
-                            CommandParameter="{TemplateBinding CommandParameter}"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Padding="{TemplateBinding Padding}"
-                            IsTabStop="False"
-                            AutomationProperties.AccessibilityView="Raw"/>
+                                Grid.Column="0"
+                                Foreground="{TemplateBinding Foreground}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="Transparent"
+                                Content="{TemplateBinding Content}"
+                                ContentTransitions="{TemplateBinding ContentTransitions}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Command="{TemplateBinding Command}"
+                                CommandParameter="{TemplateBinding CommandParameter}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Padding="{TemplateBinding Padding}"
+                                IsTabStop="False"
+                                AutomationProperties.AccessibilityView="Raw"/>
 
                         <Button x:Name="SecondaryButton"
-                            Grid.Column="1"
-                            Foreground="{TemplateBinding Foreground}"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="Transparent"
-                            HorizontalContentAlignment="Stretch"
-                            VerticalContentAlignment="Stretch"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Padding="0,0,8,0"
-                            IsTabStop="False"
-                            AutomationProperties.AccessibilityView="Raw">
+                                Grid.Column="1"
+                                Foreground="{TemplateBinding Foreground}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="Transparent"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Padding="0,0,8,0"
+                                IsTabStop="False"
+                                AutomationProperties.AccessibilityView="Raw">
                             <Button.Content>
-                                <TextBlock
+                                <TextBlock Text="&#xE70D;"
                                     FontFamily="Segoe MDL2 Assets"
                                     FontSize="12"
-                                    Text="&#xE70D;"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right"
                                     AutomationProperties.AccessibilityView="Raw"/>
@@ -485,6 +487,9 @@
 
                         <!-- All ribbon buttons go here -->
                         <StackPanel Orientation="Horizontal">
+                            <!-- This ItemPresenter doesn't do what I thought it did, but it's been so long since I touched it
+                                 that I don't remember what was weird about it. I'm just going to focus on the TabbedCommandBar
+                                 for now. -->
                             <ItemsPresenter VerticalAlignment="Stretch" />
                         </StackPanel>
 
@@ -526,6 +531,9 @@
                 <ControlTemplate TargetType="local:RibbonColumn">
                     <toolkit:UniformGrid x:Name="RootGrid" Columns="1" RowSpacing="{Binding Spacing}"
                                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <!-- This ItemPresenter doesn't do what I thought it did, but it's been so long since I touched it
+                             that I don't remember what was weird about it. I'm just going to focus on the TabbedCommandBar
+                             for now. -->
                         <ItemsPresenter/>
                     </toolkit:UniformGrid>
                 </ControlTemplate>
@@ -533,33 +541,48 @@
         </Setter>
     </Style>
 
+    
+    <!-- These styles are for the TabbedCommandBar, which acts as if it were a tab view of left aligned command bars -->
     <Style TargetType="local:TabbedCommandBar">
-        <!--<Setter Property="TabAreaBackground" Value="{ThemeResource AppBarBackgroundThemeBrush}"/>-->
         <Setter Property="Background" Value="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:TabbedCommandBar">
-                    <NavigationView Style="{StaticResource RibbonTabNavigationViewStyle}" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed"
-                                    Background="{TemplateBinding Background}" MenuItemsSource="{Binding Items}">
-                        <!--<NavigationView.Resources>
-                            <StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="Background"/>
-                        </NavigationView.Resources>-->
-                        <NavigationView.MenuItems>
-                            <NavigationViewItem Content="Home"/>
-                            <NavigationViewItem Content="Insert"/>
-                            <NavigationViewItem Content="Page Layout"/>
-                            <NavigationViewItem Content="Formulas"/>
-                            <NavigationViewItem Content="Data"/>
-                            <NavigationViewItem Content="Review"/>
-                            <NavigationViewItem Content="View"/>
-                            <NavigationViewItem Content="Help"/>
-                        </NavigationView.MenuItems>
-                        <!--<NavigationView.MenuItemTemplate>
-                            <DataTemplate>
-                                <NavigationViewItem Content="Test"/>
-                            </DataTemplate>
-                        </NavigationView.MenuItemTemplate>-->
-                    </NavigationView>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- For testing purposes, I have the menu items hardcoded. To test the binding, comment out the MenuItems element and
+                             uncomment the MenuItemTemplate element. -->
+                        <NavigationView Style="{StaticResource RibbonTabNavigationViewStyle}" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed"
+                                        Background="{TemplateBinding Background}" MenuItemsSource="{Binding Items}"
+                                        x:Name="PART_RibbonNavigationView">
+                            <NavigationView.MenuItems>
+                                <NavigationViewItem Content="Home"/>
+                                <NavigationViewItem Content="Insert"/>
+                                <NavigationViewItem Content="Page Layout"/>
+                                <NavigationViewItem Content="Formulas"/>
+                                <NavigationViewItem Content="Data"/>
+                                <NavigationViewItem Content="Review"/>
+                                <NavigationViewItem Content="View"/>
+                                <NavigationViewItem Content="Help"/>
+                            </NavigationView.MenuItems>
+                            <!-- For some reason, this data template refuses to let me set the x:DataType. I get the following error:
+                                 XamlCompiler error WMC0612: The XAML Binary Format (XBF) generator
+                                 reported syntax error '0x09C4' : Property Not Found -->
+                            <!--<NavigationView.MenuItemTemplate>
+                                <DataTemplate>
+                                    <NavigationViewItem Content="{Binding Label}" HorizontalAlignment="Stretch"/>
+                                </DataTemplate>
+                            </NavigationView.MenuItemTemplate>-->
+                        </NavigationView>
+
+                        <!-- I tried using the following binding to swap out the content without codebehind, but it just doesn't work:
+                             Content="{Binding SelectedTab, Mode=OneWay}" -->
+                        <ContentControl x:Name="PART_RibbonContent" Grid.Row="1"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -567,6 +590,9 @@
     <Style TargetType="local:TabbedCommandBarItem" BasedOn="{StaticResource CommandBarRevealStyle}">
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="DefaultLabelPosition" Value="Right"/>
-        <Setter Property="Background" Value="{ThemeResource TabViewItemHeaderBackgroundSelected}"/>
+        <Setter Property="Background" Value="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}"/>
+        <!-- Might need to actually change the template so that the overflow button is on the far right of the tab contents -->
+        <!-- Also, is there a way to prevent the overflow button from showing if there aren't any buttons to send to the overflow menu?
+             (See my message in the WinUI channel: https://discord.com/channels/372137812037730304/671870147354427422/771057634203402300 ) -->
     </Style>
 </ResourceDictionary>

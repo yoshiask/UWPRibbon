@@ -10,6 +10,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
             DefaultStyleKey = typeof(TabbedCommandBarItem);
         }
 
+        // TODO: Should probably rename this to Header
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
             "Label", typeof(string), typeof(TabbedCommandBarItem), new PropertyMetadata("Test")
         );
