@@ -543,6 +543,7 @@
 
     
     <!-- These styles are for the TabbedCommandBar, which acts as if it were a tab view of left aligned command bars -->
+    <StaticResource x:Key="TabbedCommandBarContentBackground" ResourceKey="SystemControlChromeLowAcrylicWindowBrush"/>
     <Style TargetType="local:TabbedCommandBar">
         <Setter Property="Background" Value="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}"/>
         <Setter Property="Template">
@@ -553,35 +554,31 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-
-                        <!-- For testing purposes, I have the menu items hardcoded. To test the binding, comment out the MenuItems element and
-                             uncomment the MenuItemTemplate element. -->
-                        <NavigationView Style="{StaticResource RibbonTabNavigationViewStyle}" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed"
-                                        Background="{TemplateBinding Background}" MenuItemsSource="{Binding Items}"
+                        
+                        <NavigationView Style="{StaticResource RibbonTabNavigationViewStyle}" PaneDisplayMode="Top"
+                                        Background="{TemplateBinding Background}"
                                         x:Name="PART_RibbonNavigationView">
-                            <NavigationView.MenuItems>
-                                <NavigationViewItem Content="Home"/>
-                                <NavigationViewItem Content="Insert"/>
-                                <NavigationViewItem Content="Page Layout"/>
-                                <NavigationViewItem Content="Formulas"/>
-                                <NavigationViewItem Content="Data"/>
-                                <NavigationViewItem Content="Review"/>
-                                <NavigationViewItem Content="View"/>
-                                <NavigationViewItem Content="Help"/>
-                            </NavigationView.MenuItems>
                             <!-- For some reason, this data template refuses to let me set the x:DataType. I get the following error:
                                  XamlCompiler error WMC0612: The XAML Binary Format (XBF) generator
                                  reported syntax error '0x09C4' : Property Not Found -->
-                            <!--<NavigationView.MenuItemTemplate>
+                            <NavigationView.MenuItemTemplate>
                                 <DataTemplate>
-                                    <NavigationViewItem Content="{Binding Label}" HorizontalAlignment="Stretch"/>
+                                    <NavigationViewItem Content="{Binding Header}" HorizontalAlignment="Stretch"/>
                                 </DataTemplate>
-                            </NavigationView.MenuItemTemplate>-->
+                            </NavigationView.MenuItemTemplate>
                         </NavigationView>
 
-                        <!-- I tried using the following binding to swap out the content without codebehind, but it just doesn't work:
-                             Content="{Binding SelectedTab, Mode=OneWay}" -->
-                        <ContentControl x:Name="PART_RibbonContent" Grid.Row="1"/>
+                        <Border Grid.Row="1" Background="{ThemeResource TabbedCommandBarContentBackground}" HorizontalAlignment="Stretch">
+                            <ContentControl x:Name="PART_RibbonContent">
+                                <ContentControl.Resources>
+                                    <Style TargetType="AppBarElementContainer">
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        <Setter Property="Margin" Value="0,0,2,0"/>
+                                    </Style>
+                                </ContentControl.Resources>
+                            </ContentControl>
+                        </Border>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -590,9 +587,11 @@
     <Style TargetType="local:TabbedCommandBarItem" BasedOn="{StaticResource CommandBarRevealStyle}">
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="DefaultLabelPosition" Value="Right"/>
-        <Setter Property="Background" Value="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}"/>
+        <Setter Property="Background" Value="{ThemeResource TabbedCommandBarContentBackground}"/>
         <!-- Might need to actually change the template so that the overflow button is on the far right of the tab contents -->
         <!-- Also, is there a way to prevent the overflow button from showing if there aren't any buttons to send to the overflow menu?
-             (See my message in the WinUI channel: https://discord.com/channels/372137812037730304/671870147354427422/771057634203402300 ) -->
+             (See my message in the WinUI channel: https://discord.com/channels/372137812037730304/671870147354427422/771057634203402300 )
+             Hardcoding the height of the CommandBar does work, but it's a bit of a hack. -->
+        <Setter Property="Height" Value="40"/>
     </Style>
 </ResourceDictionary>

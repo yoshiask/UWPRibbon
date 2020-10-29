@@ -21,6 +21,7 @@ namespace UWPRibbon
             coreTitleBar.ExtendViewIntoTitleBar = true;
             ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Colors.Transparent;
             ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            //ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = (Color)Resources["SystemColorWindowTextColor"];
         }
     }
 }
