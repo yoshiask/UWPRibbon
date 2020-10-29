@@ -4,13 +4,7 @@
     xmlns:local="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon"
     xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon.Converters"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:tkconverters="using:Microsoft.Toolkit.Uwp.UI.Converters"
-    xmlns:winui="using:Microsoft.UI.Xaml.Controls">
-
-    <ResourceDictionary.MergedDictionaries>
-        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-        <!-- Other merged dictionaries here -->
-    </ResourceDictionary.MergedDictionaries>
+    xmlns:tkconverters="using:Microsoft.Toolkit.Uwp.UI.Converters">
 
     <Style TargetType="local:RibbonButton">
         <Setter Property="Background" Value="{ThemeResource AppBarItemBackgroundThemeBrush}" />
