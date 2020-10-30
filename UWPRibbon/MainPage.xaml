@@ -38,9 +38,25 @@
 
             <!--  This is just some sample ribbon content, loosely based on the Excel (Win32) ribbon.  -->
             <ribbon:TabbedCommandBarItem Header="Home">
-                <AppBarButton Icon="Cut" Label="Cut" />
-                <AppBarButton Icon="Copy" Label="Copy" />
-                <AppBarButton Icon="Paste" Label="Paste" />
+                <AppBarButton Icon="Undo">
+                    <AppBarButton.Resources>
+                        <!--
+                            This is hacky, but it's the only way I can think of to get an AppBarButton to center the icon with no label.
+                            It's the same margin as default, but the left thickness is set to 0 (default is 8)
+                        -->
+                        <Thickness x:Key="AppBarButtonTextLabelOnRightMargin">0,11,12,13</Thickness>
+                    </AppBarButton.Resources>
+                </AppBarButton>
+                <AppBarButton Icon="Redo">
+                    <AppBarButton.Resources>
+                        <Thickness x:Key="AppBarButtonTextLabelOnRightMargin">0,11,12,13</Thickness>
+                    </AppBarButton.Resources>
+                </AppBarButton>
+                <AppBarButton Icon="Paste">
+                    <AppBarButton.Resources>
+                        <Thickness x:Key="AppBarButtonTextLabelOnRightMargin">0,11,12,13</Thickness>
+                    </AppBarButton.Resources>
+                </AppBarButton>
                 <AppBarSeparator />
                 <AppBarElementContainer>
                     <ComboBox SelectedIndex="0">
