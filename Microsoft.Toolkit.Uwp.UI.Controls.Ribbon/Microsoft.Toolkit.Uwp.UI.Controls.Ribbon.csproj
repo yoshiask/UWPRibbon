@@ -130,8 +130,8 @@
     <Compile Include="RibbonDropDownButton.cs" />
     <Compile Include="RibbonGroup.cs" />
     <Compile Include="RibbonSplitButton.cs" />
-    <Compile Include="TabbedCommandBar.cs" />
-    <Compile Include="TabbedCommandBarItem.cs" />
+    <Compile Include="TabbedCommandBar\TabbedCommandBar.cs" />
+    <Compile Include="TabbedCommandBar\TabbedCommandBarItem.cs" />
     <EmbeddedResource Include="Properties\Microsoft.Toolkit.Uwp.UI.Controls.Ribbon.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +143,14 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="TabbedCommandBar\TabbedCommandBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TabbedCommandBar\TabbedCommandBarItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

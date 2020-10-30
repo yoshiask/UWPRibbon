@@ -5,6 +5,9 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 {
     public class TabbedCommandBarItem : CommandBar
     {
+        private ItemsControl PrimaryItemsControl;
+        private Button MoreButton;
+
         public TabbedCommandBarItem()
         {
             DefaultStyleKey = typeof(TabbedCommandBarItem);
@@ -26,6 +29,23 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         {
             get => (UIElement)GetValue(FooterProperty);
             set => SetValue(FooterProperty, value);
+        }
+
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            PrimaryItemsControl = GetTemplateChild("PrimaryItemsControl") as ItemsControl;
+            if (PrimaryItemsControl != null)
+            {
+                PrimaryItemsControl.HorizontalAlignment = HorizontalAlignment.Left;
+            }
+
+            MoreButton = GetTemplateChild("MoreButton") as Button;
+            if (MoreButton != null)
+            {
+                MoreButton.HorizontalAlignment = HorizontalAlignment.Right;
+            }
         }
     }
 }
