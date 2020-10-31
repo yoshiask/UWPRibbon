@@ -26,14 +26,33 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Foreground="{ThemeResource MediaTextThemeBrush}"
-                Text="UWP Ribbon" />
+                Text="Nightingale" />
         </StackPanel>
+
+        <DropDownButton
+            HorizontalAlignment="Center"
+            Background="Transparent"
+            Content="My Workspace">
+            <DropDownButton.Flyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Text="Test Workspace" />
+                </MenuFlyout>
+            </DropDownButton.Flyout>
+        </DropDownButton>
 
         <ribbon:TabbedCommandBar Grid.Row="1" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
             <ribbon:TabbedCommandBar.Footer>
                 <CommandBar Background="Transparent" DefaultLabelPosition="Right">
-                    <AppBarButton Icon="Share" Label="Share" />
-                    <AppBarButton Icon="Message" Label="Comments" />
+                    <AppBarButton Label="Support developer">
+                        <AppBarButton.Resources>
+                            <Thickness x:Key="AppBarButtonTextLabelOnRightMargin">0,11,12,13</Thickness>
+                        </AppBarButton.Resources>
+                    </AppBarButton>
+                    <AppBarButton Icon="Setting">
+                        <AppBarButton.Resources>
+                            <Thickness x:Key="AppBarButtonTextLabelOnRightMargin">0,11,12,13</Thickness>
+                        </AppBarButton.Resources>
+                    </AppBarButton>
                 </CommandBar>
             </ribbon:TabbedCommandBar.Footer>
 
@@ -43,14 +62,73 @@
                 <StaticResource x:Key="TabbedCommandBarContentBackground" ResourceKey="SystemControlChromeLowAcrylicWindowBrush" />
             </ribbon:TabbedCommandBar.Resources>
 
-            <!--  This is just some sample ribbon content, loosely based on the Excel (Win32) ribbon.  -->
             <ribbon:TabbedCommandBarItem Header="Home">
+                <AppBarButton Icon="Save" Label="Save" />
+                <AppBarButton Label="Add request">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70B;" />
+                </AppBarButton>
+                <AppBarButton Label="Add collection">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE838;" />
+                </AppBarButton>
+                <AppBarButton Icon="Import" Label="Import" />
+                <AppBarButton Label="Export">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEDE1;" />
+                </AppBarButton>
+            </ribbon:TabbedCommandBarItem>
+
+            <ribbon:TabbedCommandBarItem Header="Workspace">
+                <AppBarButton Label="Add workspace">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF5ED;" />
+                </AppBarButton>
+                <AppBarButton Label="Cookies">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE790;" />
+                </AppBarButton>
+                <AppBarButton Icon="Globe" Label="Environment variables" />
+                <AppBarButton Label="Save tab to workspace">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" />
+                </AppBarButton>
+                <AppBarButton Label="Deploy mock server">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE968;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </ribbon:TabbedCommandBarItem>
+
+            <ribbon:TabbedCommandBarItem Header="View">
+                <AppBarToggleButton Label="Single-column">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE745;" />
+                </AppBarToggleButton>
+                <AppBarToggleButton Label="Two-column">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE746;" />
+                </AppBarToggleButton>
+            </ribbon:TabbedCommandBarItem>
+
+            <ribbon:TabbedCommandBarItem Header="Help">
+                <AppBarButton Label="Troubleshoot localhost">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE977;" />
+                </AppBarButton>
+                <AppBarButton Label="What's new">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE789;" />
+                </AppBarButton>
+                <AppBarButton Label="Known bugs">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEBE8;" />
+                </AppBarButton>
+                <AppBarButton Icon="Mail" Label="Email developer" />
+                <AppBarButton Label="Send feedback">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xED15;" />
+                </AppBarButton>
+            </ribbon:TabbedCommandBarItem>
+
+            <!--  This is just some sample ribbon content, loosely based on the Excel (Win32) ribbon.  -->
+            <!--<ribbon:TabbedCommandBarItem Header="Office Home">
                 <AppBarButton Icon="Undo">
                     <AppBarButton.Resources>
-                        <!--
-                            This is hacky, but it's the only way I can think of to get an AppBarButton to center the icon with no label.
-                            It's the same margin as default, but the left thickness is set to 0 (default is 8)
-                        -->
+            -->
+            <!--
+                This is hacky, but it's the only way I can think of to get an AppBarButton to center the icon with no label.
+                It's the same margin as default, but the left thickness is set to 0 (default is 8)
+            -->
+            <!--
                         <Thickness x:Key="AppBarButtonTextLabelOnRightMargin">0,11,12,13</Thickness>
                     </AppBarButton.Resources>
                 </AppBarButton>
@@ -109,7 +187,7 @@
                 <ribbon:TabbedCommandBarItem.SecondaryCommands>
                     <AppBarButton Icon="Add" Label="Test" />
                 </ribbon:TabbedCommandBarItem.SecondaryCommands>
-            </ribbon:TabbedCommandBarItem>
+            </ribbon:TabbedCommandBarItem>-->
         </ribbon:TabbedCommandBar>
 
     </Grid>
