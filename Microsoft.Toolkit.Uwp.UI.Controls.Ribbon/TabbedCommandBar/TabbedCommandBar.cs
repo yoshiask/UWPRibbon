@@ -20,10 +20,16 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
             get { return (IList<TabbedCommandBarItem>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsProperty =
             DependencyProperty.Register(nameof(Items), typeof(IList<TabbedCommandBarItem>), typeof(TabbedCommandBar), new PropertyMetadata(new List<TabbedCommandBarItem>()));
+
+        public UIElement Footer
+        {
+            get { return (UIElement)GetValue(FooterProperty); }
+            set { SetValue(FooterProperty, value); }
+        }
+        public static readonly DependencyProperty FooterProperty =
+            DependencyProperty.Register(nameof(Footer), typeof(UIElement), typeof(TabbedCommandBar), new PropertyMetadata(new Border()));
 
         public TabbedCommandBar()
         {
@@ -48,6 +54,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
                 {
                     RibbonNavigationView.MenuItems.Add(item);
                 }
+                RibbonNavigationView.PaneFooter = Footer;
 
                 RibbonNavigationView.SelectionChanged += RibbonNavigationView_SelectionChanged;
                 RibbonNavigationView.SelectedItem = RibbonNavigationView.MenuItems.FirstOrDefault();

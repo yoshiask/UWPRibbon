@@ -30,6 +30,13 @@
         </StackPanel>
 
         <ribbon:TabbedCommandBar Grid.Row="1" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+            <ribbon:TabbedCommandBar.Footer>
+                <CommandBar Background="Transparent" DefaultLabelPosition="Right">
+                    <AppBarButton Icon="Share" Label="Share" />
+                    <AppBarButton Icon="Message" Label="Comments" />
+                </CommandBar>
+            </ribbon:TabbedCommandBar.Footer>
+
             <ribbon:TabbedCommandBar.Resources>
                 <!--  Need a way to expose the pane background to the actual Background property of the TabbedCommandBar  -->
                 <StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SystemControlChromeMediumLowAcrylicWindowMediumBrush" />
