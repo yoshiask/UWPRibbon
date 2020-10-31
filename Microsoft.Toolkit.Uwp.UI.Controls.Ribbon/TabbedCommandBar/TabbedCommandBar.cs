@@ -15,13 +15,14 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         // This should probably be made public at some point
         private TabbedCommandBarItem SelectedTab { get; set; }
 
-        public IList<TabbedCommandBarItem> Items
+        // I would prefer this be an IList<TabbedCommandBarItem>, but Intellisense really doesn't like that.
+        public IList<object> Items
         {
-            get { return (IList<TabbedCommandBarItem>)GetValue(ItemsProperty); }
+            get { return (IList<object>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
         }
         public static readonly DependencyProperty ItemsProperty =
-            DependencyProperty.Register(nameof(Items), typeof(IList<TabbedCommandBarItem>), typeof(TabbedCommandBar), new PropertyMetadata(new List<TabbedCommandBarItem>()));
+            DependencyProperty.Register(nameof(Items), typeof(IList<object>), typeof(TabbedCommandBar), new PropertyMetadata(new List<object>()));
 
         public UIElement Footer
         {
