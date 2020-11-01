@@ -14,7 +14,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         }
 
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
-            "Header", typeof(string), typeof(TabbedCommandBarItem), new PropertyMetadata("Test")
+            nameof(Header), typeof(string), typeof(TabbedCommandBarItem), new PropertyMetadata("Test")
         );
         public string Header
         {
@@ -23,12 +23,21 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         }
 
         public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(
-            "Footer", typeof(UIElement), typeof(TabbedCommandBarItem), new PropertyMetadata(new Grid())
+            nameof(Footer), typeof(UIElement), typeof(TabbedCommandBarItem), new PropertyMetadata(new Grid())
         );
         public UIElement Footer
         {
             get => (UIElement)GetValue(FooterProperty);
             set => SetValue(FooterProperty, value);
+        }
+
+        public static readonly DependencyProperty IsContextualProperty = DependencyProperty.Register(
+            nameof(IsContextual), typeof(bool), typeof(TabbedCommandBarItem), new PropertyMetadata(false)
+        );
+        public bool IsContextual
+        {
+            get => (bool)GetValue(IsContextualProperty);
+            set => SetValue(IsContextualProperty, value);
         }
 
         protected override void OnApplyTemplate()
