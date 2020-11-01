@@ -653,24 +653,33 @@
                             </NavigationView.MenuItemTemplate>
                         </NavigationView>
 
-                        <Border
+                        <Frame
+                            x:Name="PART_RibbonContentFrame"
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
-                            Background="{ThemeResource TabbedCommandBarContentBackground}">
-                            <ContentControl x:Name="PART_RibbonContent" HorizontalContentAlignment="Stretch">
-                                <ContentControl.Resources>
-                                    <Style TargetType="AppBarElementContainer">
-                                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                        <Setter Property="Margin" Value="0,0,2,0" />
-                                    </Style>
-                                </ContentControl.Resources>
-                            </ContentControl>
-                        </Border>
+                            Background="{ThemeResource TabbedCommandBarContentBackground}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
+
+    <Style TargetType="local:RibbonContentControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:RibbonContentControl">
+                    <ContentControl x:Name="PART_RibbonContent" HorizontalContentAlignment="Stretch">
+                        <ContentControl.Resources>
+                            <Style TargetType="AppBarElementContainer">
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Margin" Value="0,0,2,0" />
+                            </Style>
+                        </ContentControl.Resources>
+                    </ContentControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

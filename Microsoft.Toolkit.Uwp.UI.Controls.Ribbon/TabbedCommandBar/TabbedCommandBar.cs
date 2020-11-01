@@ -3,6 +3,7 @@ using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Markup;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
 {
@@ -10,7 +11,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
     public class TabbedCommandBar : Control
     {
         private NavigationView RibbonNavigationView = null;
-        private ContentControl RibbonContent = null;
+        private Frame RibbonContentFrame = null;
 
         // This should probably be made public at some point
         private TabbedCommandBarItem SelectedTab { get; set; }
@@ -44,9 +45,9 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
             // Should probably put the part name in a const string
 
             // Get RibbonContent first, since setting SelectedItem requires it
-            RibbonContent = GetTemplateChild("PART_RibbonContent") as ContentControl;
+            RibbonContentFrame = GetTemplateChild("PART_" + nameof(RibbonContentFrame)) as Frame;
 
-            RibbonNavigationView = GetTemplateChild("PART_RibbonNavigationView") as NavigationView;
+            RibbonNavigationView = GetTemplateChild("PART_" + nameof(RibbonNavigationView)) as NavigationView;
             if (RibbonNavigationView != null)
             {
                 // Populate the NavigationView with items
@@ -62,17 +63,30 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
             }
         }
 
+        private int previousIndex = 0;
         private void RibbonNavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             if (args.SelectedItem is TabbedCommandBarItem item)
             {
-                RibbonContent.Content = item;
+                int currentIndex = RibbonNavigationView.MenuItems.IndexOf(item);
+                NavigationTransitionInfo transitionInfo;
+
+                if (currentIndex > previousIndex)
+                {
+                    transitionInfo = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight };
+                }
+                else
+                {
+                    transitionInfo = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft };
+                }
+                RibbonContentFrame.Navigate(typeof(RibbonContentControl), item, transitionInfo);
+                previousIndex = currentIndex;
             }
             else if (args.SelectedItem is NavigationViewItem navItem)
             {
                 // This code is a hack and is only temporary, because I can't get binding to work.
                 // RibbonContent might be null here, there should be a check
-                RibbonContent.Content = Items[System.Math.Min(Items.Count - 1, RibbonNavigationView.MenuItems.IndexOf(navItem))];
+                RibbonContentFrame.Content = Items[System.Math.Min(Items.Count - 1, RibbonNavigationView.MenuItems.IndexOf(navItem))];
             }
         }
     }
