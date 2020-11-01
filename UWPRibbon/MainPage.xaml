@@ -29,17 +29,6 @@
                 Text="Nightingale" />
         </StackPanel>
 
-        <DropDownButton
-            HorizontalAlignment="Center"
-            Background="Transparent"
-            Content="My Workspace">
-            <DropDownButton.Flyout>
-                <MenuFlyout>
-                    <MenuFlyoutItem Text="Test Workspace" />
-                </MenuFlyout>
-            </DropDownButton.Flyout>
-        </DropDownButton>
-
         <ribbon:TabbedCommandBar Grid.Row="1" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
             <ribbon:TabbedCommandBar.Footer>
                 <CommandBar Background="Transparent" DefaultLabelPosition="Right">

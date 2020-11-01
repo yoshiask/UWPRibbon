@@ -631,6 +631,31 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local:TabbedCommandBar">
                     <Grid>
+                        <Grid.Resources>
+                            <!--
+                                For some reason, this data template refuses to let me set the x:DataType. I get the following error:
+                                XamlCompiler error WMC0612: The XAML Binary Format (XBF) generator
+                                reported syntax error '0x09C4' : Property Not Found
+                            -->
+                            <DataTemplate x:Key="NormalTabTemplate">
+                                <NavigationViewItem Content="{Binding Header}" />
+                            </DataTemplate>
+                            <DataTemplate x:Key="ContextualTabTemplate">
+                                <NavigationViewItem Content="{Binding Header}">
+                                    <NavigationViewItem.Resources>
+                                        <SolidColorBrush x:Key="TopNavigationViewItemForeground" Color="{ThemeResource SystemAccentColor}" />
+                                        <SolidColorBrush x:Key="TopNavigationViewItemForegroundSelected" Color="{ThemeResource SystemAccentColor}" />
+                                        <SolidColorBrush x:Key="TopNavigationViewItemForegroundPointerOver" Color="{ThemeResource SystemAccentColorLight2}" />
+                                        <SolidColorBrush x:Key="TopNavigationViewItemForegroundPressed" Color="{ThemeResource SystemAccentColorLight2}" />
+                                    </NavigationViewItem.Resources>
+                                </NavigationViewItem>
+                            </DataTemplate>
+                            <local:TabbedCommandBarItemTemplateSelector
+                                x:Key="DefaultTabbedCommandBarItemTemplateSelector"
+                                Contextual="{StaticResource ContextualTabTemplate}"
+                                Normal="{StaticResource NormalTabTemplate}" />
+                        </Grid.Resources>
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -639,24 +664,14 @@
                         <NavigationView
                             x:Name="PART_RibbonNavigationView"
                             Background="{TemplateBinding Background}"
+                            MenuItemTemplateSelector="{StaticResource DefaultTabbedCommandBarItemTemplateSelector}"
                             PaneDisplayMode="Top"
-                            Style="{StaticResource RibbonTabNavigationViewStyle}">
-                            <!--
-                                For some reason, this data template refuses to let me set the x:DataType. I get the following error:
-                                XamlCompiler error WMC0612: The XAML Binary Format (XBF) generator
-                                reported syntax error '0x09C4' : Property Not Found
-                            -->
-                            <NavigationView.MenuItemTemplate>
-                                <DataTemplate>
-                                    <NavigationViewItem HorizontalAlignment="Stretch" Content="{Binding Header}" />
-                                </DataTemplate>
-                            </NavigationView.MenuItemTemplate>
-                        </NavigationView>
+                            Style="{StaticResource RibbonTabNavigationViewStyle}" />
 
                         <Border
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
-                            Background="{ThemeResource TabbedCommandBarContentBackground}"/>
+                            Background="{ThemeResource TabbedCommandBarContentBackground}" />
                         <ContentControl
                             x:Name="PART_RibbonContent"
                             Grid.Row="1"
@@ -664,7 +679,7 @@
                             HorizontalContentAlignment="Stretch">
                             <ContentControl.Resources>
                                 <Storyboard x:Name="TabChangedStoryboard">
-                                    <PopInThemeAnimation TargetName="PART_RibbonContent"/>
+                                    <PopInThemeAnimation TargetName="PART_RibbonContent" />
                                 </Storyboard>
                             </ContentControl.Resources>
                         </ContentControl>

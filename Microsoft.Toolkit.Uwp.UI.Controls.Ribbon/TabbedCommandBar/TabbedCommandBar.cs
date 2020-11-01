@@ -50,6 +50,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
             if (RibbonNavigationView != null)
             {
                 // Populate the NavigationView with items
+                // TODO: Get binding working, necessary for contextual tabs
                 RibbonNavigationView.MenuItems.Clear();
                 foreach (TabbedCommandBarItem item in Items)
                 {
