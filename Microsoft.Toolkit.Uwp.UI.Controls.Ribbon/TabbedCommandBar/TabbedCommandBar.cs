@@ -18,6 +18,9 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         private TabbedCommandBarItem SelectedTab { get; set; }
 
         // I would prefer this be an IList<TabbedCommandBarItem>, but Intellisense really doesn't like that.
+        /// <summary>
+        /// A list of <see cref="TabbedCommandBarItem"/>s to display in this <see cref="TabbedCommandBar"/>.
+        /// </summary>
         public IList<object> Items
         {
             get { return (IList<object>)GetValue(ItemsProperty); }
@@ -26,6 +29,9 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         public static readonly DependencyProperty ItemsProperty =
             DependencyProperty.Register(nameof(Items), typeof(IList<object>), typeof(TabbedCommandBar), new PropertyMetadata(new List<object>()));
 
+        /// <summary>
+        /// A <see cref="UIElement"/> to be displayed in the footer of the ribbon tab strip.
+        /// </summary>
         public UIElement Footer
         {
             get { return (UIElement)GetValue(FooterProperty); }
@@ -34,6 +40,9 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         public static readonly DependencyProperty FooterProperty =
             DependencyProperty.Register(nameof(Footer), typeof(UIElement), typeof(TabbedCommandBar), new PropertyMetadata(new Border()));
 
+        /// <summary>
+        /// Creates a new instance of a <see cref="TabbedCommandBar"/>.
+        /// </summary>
         public TabbedCommandBar()
         {
             DefaultStyleKey = typeof(TabbedCommandBar);

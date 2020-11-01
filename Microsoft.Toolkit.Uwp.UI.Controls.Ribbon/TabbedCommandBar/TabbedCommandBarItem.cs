@@ -8,6 +8,9 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         private ItemsControl PrimaryItemsControl;
         private Button MoreButton;
 
+        /// <summary>
+        /// Creates a new instance of a <see cref="TabbedCommandBarItem"/>.
+        /// </summary>
         public TabbedCommandBarItem()
         {
             DefaultStyleKey = typeof(TabbedCommandBarItem);
@@ -16,6 +19,9 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls.Ribbon
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
             nameof(Header), typeof(string), typeof(TabbedCommandBarItem), new PropertyMetadata("Test")
         );
+        /// <summary>
+        /// The title of this ribbon tab.
+        /// </summary>
         public string Header
         {
             get => (string)GetValue(HeaderProperty);
