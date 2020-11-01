@@ -131,7 +131,6 @@
     <Compile Include="RibbonGroup.cs" />
     <Compile Include="RibbonSplitButton.cs" />
     <Compile Include="TabbedCommandBar\TabbedCommandBar.cs" />
-    <Compile Include="TabbedCommandBar\RibbonContentControl.cs" />
     <Compile Include="TabbedCommandBar\TabbedCommandBarItem.cs" />
     <EmbeddedResource Include="Properties\Microsoft.Toolkit.Uwp.UI.Controls.Ribbon.rd.xml" />
   </ItemGroup>

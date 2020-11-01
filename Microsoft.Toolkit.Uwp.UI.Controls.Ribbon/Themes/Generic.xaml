@@ -653,31 +653,22 @@
                             </NavigationView.MenuItemTemplate>
                         </NavigationView>
 
-                        <Frame
-                            x:Name="PART_RibbonContentFrame"
+                        <Border
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
                             Background="{ThemeResource TabbedCommandBarContentBackground}"/>
+                        <ContentControl
+                            x:Name="PART_RibbonContent"
+                            Grid.Row="1"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch">
+                            <ContentControl.Resources>
+                                <Storyboard x:Name="TabChangedStoryboard">
+                                    <PopInThemeAnimation TargetName="PART_RibbonContent"/>
+                                </Storyboard>
+                            </ContentControl.Resources>
+                        </ContentControl>
                     </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-
-    <Style TargetType="local:RibbonContentControl">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local:RibbonContentControl">
-                    <ContentControl x:Name="PART_RibbonContent" HorizontalContentAlignment="Stretch">
-                        <ContentControl.Resources>
-                            <Style TargetType="AppBarElementContainer">
-                                <Setter Property="VerticalContentAlignment" Value="Center" />
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="Margin" Value="0,0,2,0" />
-                            </Style>
-                        </ContentControl.Resources>
-                    </ContentControl>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
