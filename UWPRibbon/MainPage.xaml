@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:UWPRibbon"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ribbon="using:Microsoft.Toolkit.Uwp.UI.Controls.Ribbon"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     RequestedTheme="Dark"
     mc:Ignorable="d">
@@ -29,8 +29,8 @@
                 Text="Nightingale" />
         </StackPanel>
 
-        <ribbon:TabbedCommandBar Grid.Row="1" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
-            <ribbon:TabbedCommandBar.Footer>
+        <controls:TabbedCommandBar Grid.Row="1" Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}">
+            <controls:TabbedCommandBar.PaneFooter>
                 <CommandBar Background="Transparent" DefaultLabelPosition="Right">
                     <AppBarButton Label="Support developer">
                         <AppBarButton.Resources>
@@ -43,70 +43,72 @@
                         </AppBarButton.Resources>
                     </AppBarButton>
                 </CommandBar>
-            </ribbon:TabbedCommandBar.Footer>
+            </controls:TabbedCommandBar.PaneFooter>
 
-            <ribbon:TabbedCommandBar.Resources>
+            <controls:TabbedCommandBar.Resources>
                 <!--  Need a way to expose the pane background to the actual Background property of the TabbedCommandBar  -->
                 <StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SystemControlChromeMediumLowAcrylicWindowMediumBrush" />
                 <StaticResource x:Key="TabbedCommandBarContentBackground" ResourceKey="SystemControlChromeLowAcrylicWindowBrush" />
-            </ribbon:TabbedCommandBar.Resources>
+            </controls:TabbedCommandBar.Resources>
 
-            <ribbon:TabbedCommandBarItem Header="Home">
-                <AppBarButton Icon="Save" Label="Save" />
-                <AppBarButton Label="Add request">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70B;" />
-                </AppBarButton>
-                <AppBarButton Label="Add collection">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE838;" />
-                </AppBarButton>
-                <AppBarButton Icon="Import" Label="Import" />
-                <AppBarButton Label="Export">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEDE1;" />
-                </AppBarButton>
-            </ribbon:TabbedCommandBarItem>
+            <controls:TabbedCommandBar.MenuItems>
+                <controls:TabbedCommandBarItem Header="Home">
+                    <AppBarButton Icon="Save" Label="Save" />
+                    <AppBarButton Label="Add request">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70B;" />
+                    </AppBarButton>
+                    <AppBarButton Label="Add collection">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE838;" />
+                    </AppBarButton>
+                    <AppBarButton Icon="Import" Label="Import" />
+                    <AppBarButton Label="Export">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEDE1;" />
+                    </AppBarButton>
+                </controls:TabbedCommandBarItem>
 
-            <ribbon:TabbedCommandBarItem Header="Workspace">
-                <AppBarButton Label="Add workspace">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF5ED;" />
-                </AppBarButton>
-                <AppBarButton Label="Cookies">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE790;" />
-                </AppBarButton>
-                <AppBarButton Icon="Globe" Label="Environment variables" />
-                <AppBarButton Label="Save tab to workspace">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" />
-                </AppBarButton>
-                <AppBarButton Label="Deploy mock server">
-                    <AppBarButton.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE968;" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
-            </ribbon:TabbedCommandBarItem>
+                <controls:TabbedCommandBarItem Header="Workspace">
+                    <AppBarButton Label="Add workspace">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF5ED;" />
+                    </AppBarButton>
+                    <AppBarButton Label="Cookies">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE790;" />
+                    </AppBarButton>
+                    <AppBarButton Icon="Globe" Label="Environment variables" />
+                    <AppBarButton Label="Save tab to workspace">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" />
+                    </AppBarButton>
+                    <AppBarButton Label="Deploy mock server">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE968;" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                </controls:TabbedCommandBarItem>
 
-            <ribbon:TabbedCommandBarItem Header="View">
-                <AppBarToggleButton Label="Single-column">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE745;" />
-                </AppBarToggleButton>
-                <AppBarToggleButton Label="Two-column">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE746;" />
-                </AppBarToggleButton>
-            </ribbon:TabbedCommandBarItem>
+                <controls:TabbedCommandBarItem Header="View">
+                    <AppBarToggleButton Label="Single-column">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE745;" />
+                    </AppBarToggleButton>
+                    <AppBarToggleButton Label="Two-column">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE746;" />
+                    </AppBarToggleButton>
+                </controls:TabbedCommandBarItem>
 
-            <ribbon:TabbedCommandBarItem Header="Help">
-                <AppBarButton Label="Troubleshoot localhost">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE977;" />
-                </AppBarButton>
-                <AppBarButton Label="What's new">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE789;" />
-                </AppBarButton>
-                <AppBarButton Label="Known bugs">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEBE8;" />
-                </AppBarButton>
-                <AppBarButton Icon="Mail" Label="Email developer" />
-                <AppBarButton Label="Send feedback">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xED15;" />
-                </AppBarButton>
-            </ribbon:TabbedCommandBarItem>
+                <controls:TabbedCommandBarItem Header="Help">
+                    <AppBarButton Label="Troubleshoot localhost">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE977;" />
+                    </AppBarButton>
+                    <AppBarButton Label="What's new">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE789;" />
+                    </AppBarButton>
+                    <AppBarButton Label="Known bugs">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEBE8;" />
+                    </AppBarButton>
+                    <AppBarButton Icon="Mail" Label="Email developer" />
+                    <AppBarButton Label="Send feedback">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xED15;" />
+                    </AppBarButton>
+                </controls:TabbedCommandBarItem>
+            </controls:TabbedCommandBar.MenuItems>
 
             <!--  This is just some sample ribbon content, loosely based on the Excel (Win32) ribbon.  -->
             <!--<ribbon:TabbedCommandBarItem Header="Office Home">
@@ -177,7 +179,7 @@
                     <AppBarButton Icon="Add" Label="Test" />
                 </ribbon:TabbedCommandBarItem.SecondaryCommands>
             </ribbon:TabbedCommandBarItem>-->
-        </ribbon:TabbedCommandBar>
+        </controls:TabbedCommandBar>
 
     </Grid>
 

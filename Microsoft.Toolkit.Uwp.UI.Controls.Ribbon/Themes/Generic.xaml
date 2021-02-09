@@ -615,7 +615,7 @@
     <Style BasedOn="{StaticResource CommandBarRevealStyle}" TargetType="local:TabbedCommandBarItem">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="DefaultLabelPosition" Value="Right" />
-        <Setter Property="Background" Value="{ThemeResource TabbedCommandBarContentBackground}" />
+        <Setter Property="Background" Value="Transparent" />
         <!--
             Also, is there a way to prevent the overflow button from showing if there aren't any buttons to send to the overflow menu?
             (See my message in the WinUI channel: https://discord.com/channels/372137812037730304/671870147354427422/771057634203402300 )
@@ -623,8 +623,6 @@
         -->
         <Setter Property="Height" Value="40" />
     </Style>
-
-    <StaticResource x:Key="TabbedCommandBarContentBackground" ResourceKey="SystemControlChromeLowAcrylicWindowBrush" />
     <Style TargetType="local:TabbedCommandBar">
         <Setter Property="Background" Value="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}" />
         <Setter Property="Template">

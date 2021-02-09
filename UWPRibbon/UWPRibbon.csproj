@@ -155,17 +155,11 @@
       <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>7.0.0-preview3</Version>
+      <Version>7.0.0-build.466.g48c362ce0f</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.5.0-prerelease.200609001</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Toolkit.Uwp.UI.Controls.Ribbon\Microsoft.Toolkit.Uwp.UI.Controls.Ribbon.csproj">
-      <Project>{5497a326-ade3-4663-a346-a7201aa4b290}</Project>
-      <Name>Microsoft.Toolkit.Uwp.UI.Controls.Ribbon</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
